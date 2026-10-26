@@ -1,5 +1,5 @@
 // حوّل - تشغيل بدون إنترنت. غيّر رقم النسخة بالسطر الجاي عند كل تحديث (1.2 ثم 1.3 ...).
-var V = 'test-1.11';
+var V = 'test-1.12';
 var FILES = ['./', 'index.html', 'manifest.webmanifest', 'test-192.png', 'test-512.png', 'test-apple.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(V).then(function (c) {
