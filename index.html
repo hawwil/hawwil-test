@@ -410,6 +410,8 @@ input:focus,input:focus-visible{outline:none}
       <div id="restPick" hidden>
         <div class="rpHd"><img id="rpImg" alt=""><b id="rpName"></b></div>
         <div class="rcon" id="rcon"></div>
+        <button class="go" id="rpPayBtn" type="button" hidden data-i18n="restPayBtn">ادفع</button>
+        <div id="rpPay" hidden>
         <span class="lbl stp" data-i18n="payMethod">اختار وسيلة الدفع</span>
         <div class="methods" id="rpM">
           <button class="m" type="button" data-w="jawwal" aria-pressed="false"><img id="rpJi" alt=""><span data-i18n="m_jawwal">جوال باي</span><small class="rna" hidden data-i18n="restNA">غير متاح</small></button>
@@ -423,6 +425,7 @@ input:focus,input:focus-visible{outline:none}
           </div>
         </div>
         <button class="go" id="rpGo" type="button" disabled style="margin-top:16px" data-i18n="cont">تابع</button>
+        </div>
         <button class="ghost" id="rpBack" type="button" style="margin-top:10px" data-i18n="back">رجوع</button>
       </div>
       <p class="rdisc" data-i18n="restDisc">حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.</p>
@@ -2237,7 +2240,7 @@ $('back').addEventListener('click', function () {
 
 var I18N = {
   ar: {
-    restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
+    restPayBtn: 'ادفع',     restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
     hardRef: 'تحديث التطبيق (مسح الكاش)', hardRefDone: 'تم. بيعيد التحميل...',
     tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_pharmacies: 'صيدليات', cat_offices: 'مكاتب', cat_taxis: 'تكاسي', cat_malls: 'مولات', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
     brand: 'حوّل', themeAria: 'تبديل العرض نهاري أو ليلي', offline: 'بدون إنترنت',
@@ -2275,7 +2278,7 @@ var I18N = {
     credit: 'تم التطوير من', creditSfx: 'للخدمات الرقمية', shekel: 'شيكل', payMerchant: 'دفع لتاجر', afterPin: 'بعد الرمز السري'
   },
   en: {
-    restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
+    restPayBtn: 'Pay',     restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
     hardRef: 'Refresh app (clear cache)', hardRefDone: 'Done. Reloading...',
     tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', cat_all: 'All', cat_restaurants: 'Restaurants', cat_pharmacies: 'Pharmacies', cat_offices: 'Offices', cat_taxis: 'Taxis', cat_malls: 'Malls', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
     brand: 'Hawwil', themeAria: 'Switch day or night mode', offline: 'Works offline',
@@ -2747,6 +2750,8 @@ function openRest(r, w) {
   });
   if (n === 1) restW = has.jawwal ? 'jawwal' : 'palpay';
   if (w && has[w]) restW = w;
+  var hasPay = has.jawwal || has.palpay;
+  $('rpPayBtn').hidden = !hasPay || !!w; $('rpPay').hidden = !hasPay || !w;
   restPaint();
   restCat = r.cat; renderShops(); setRestView('pick'); show('rest');
 }
@@ -2756,6 +2761,7 @@ function restPaint() {
   $('rpSim').hidden = restW !== 'jawwal';
   document.querySelectorAll('#rpSim button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.rsim === sim ? 'true' : 'false'); });
 }
+$('rpPayBtn').addEventListener('click', function () { this.hidden = true; $('rpPay').hidden = false; });
 document.querySelectorAll('#rpSim button').forEach(function (b) {
   b.addEventListener('click', function () { sim = b.dataset.rsim; store('sim', sim); restPaint(); });
 });
