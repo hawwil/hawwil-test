@@ -175,6 +175,7 @@ details p{margin:0 0 12px;color:var(--muted);font-size:14px}
 .rcat[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .rsearch{width:100%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 14px;font:inherit;font-weight:600;font-size:16px;min-height:46px;margin:0 0 10px}
 .rsearch[hidden],.rcats[hidden]{display:none}
+.rc .ci{display:block;width:76px;height:76px;margin:0 auto 10px}.rc .ci svg{display:block;width:100%;height:100%}
 .rcon{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:-6px 0 16px}
 .rcon a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;min-height:40px}
 .rcon svg{flex:none}
@@ -340,7 +341,7 @@ input:focus,input:focus-visible{outline:none}
 <path d="M402 262 L262 396" stroke="url(#my2)" stroke-width="84" transform="translate(0 4)"/></g></g></svg></span><span class="bt"><span data-i18n="brand">حوّل</span><small class="tag" data-i18n="tagline">مساعد تحويل أموال</small></span></div>
     <div class="tools"><button class="lang" id="lang" type="button">EN</button><button class="theme" id="theme" type="button" data-i18n-aria="themeAria" aria-label="تبديل العرض نهاري أو ليلي"></button><button class="theme" id="helpBtn" type="button" data-i18n-aria="help" aria-label="مساعدة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></svg></button></div>
   </header>
-  <nav class="tabs" id="tabs"><button type="button" id="tabForm" aria-pressed="true" data-i18n="tabSend">تحويل</button><button type="button" id="tabHist" aria-pressed="false" data-i18n="tabHist">تحويلاتي</button><button type="button" id="tabRest" aria-pressed="false" data-i18n="tabRest">مطاعم</button></nav>
+  <nav class="tabs" id="tabs"><button type="button" id="tabForm" aria-pressed="true" data-i18n="tabSend">تحويل</button><button type="button" id="tabHist" aria-pressed="false" data-i18n="tabHist">تحويلاتي</button><button type="button" id="tabRest" aria-pressed="false" data-i18n="tabRest">الدليل</button></nav>
 
   <main>
     <section id="form" class="panel on">
@@ -393,11 +394,15 @@ input:focus,input:focus-visible{outline:none}
     </section>
 
     <section id="restPanel" class="panel">
-      <div id="restList">
-        <span class="lbl stp" data-i18n="restTitle">مطاعم ومحلات</span>
+      <div id="restCats">
+        <span class="lbl stp" data-i18n="restPickCat">اختار التصنيف</span>
+        <div class="rgrid" id="cgrid"></div>
+      </div>
+      <div id="restShops" hidden>
+        <span class="lbl stp" id="rsTitle"></span>
         <input class="rsearch" id="rsearch" type="search" hidden autocomplete="off" data-i18n-ph="restSearch" placeholder="ابحث">
-        <div class="rcats" id="rcats" hidden></div>
         <div class="rgrid" id="rgrid"></div>
+        <button class="ghost" id="rsBack" type="button" style="margin-top:16px" data-i18n="back">رجوع</button>
       </div>
       <div id="restPick" hidden>
         <div class="rpHd"><img id="rpImg" alt=""><b id="rpName"></b></div>
@@ -2213,7 +2218,7 @@ $('back').addEventListener('click', function () {
 var I18N = {
   ar: {
     hardRef: 'تحديث التطبيق (مسح الكاش)', hardRefDone: 'تم. بيعيد التحميل...',
-    tabRest: 'مطاعم', restTitle: 'مطاعم ومحلات', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_pharmacies: 'صيدليات', cat_offices: 'مكاتب', cat_taxis: 'تكاسي', cat_malls: 'مولات', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
+    tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_pharmacies: 'صيدليات', cat_offices: 'مكاتب', cat_taxis: 'تكاسي', cat_malls: 'مولات', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
     brand: 'حوّل', themeAria: 'تبديل العرض نهاري أو ليلي', offline: 'بدون إنترنت',
     payTo: 'بدك تدفع إلى', driver: 'سائق', merchant: 'تاجر', friend: 'صديق',
     payMethod: 'اختار وسيلة الدفع', m_jawwal: 'جوال باي', m_palpay: 'بال باي', m_bop: 'بنك فلسطين', soon: 'قريباً',
@@ -2250,7 +2255,7 @@ var I18N = {
   },
   en: {
     hardRef: 'Refresh app (clear cache)', hardRefDone: 'Done. Reloading...',
-    tabRest: 'Restaurants', restTitle: 'Restaurants & shops', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', cat_all: 'All', cat_restaurants: 'Restaurants', cat_pharmacies: 'Pharmacies', cat_offices: 'Offices', cat_taxis: 'Taxis', cat_malls: 'Malls', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
+    tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', cat_all: 'All', cat_restaurants: 'Restaurants', cat_pharmacies: 'Pharmacies', cat_offices: 'Offices', cat_taxis: 'Taxis', cat_malls: 'Malls', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
     brand: 'Hawwil', themeAria: 'Switch day or night mode', offline: 'Works offline',
     payTo: 'Pay to', driver: 'Driver', merchant: 'Merchant', friend: 'Friend',
     payMethod: 'Choose payment method', m_jawwal: 'Jawwal Pay', m_palpay: 'PalPay', m_bop: 'Bank of Palestine', soon: 'Soon',
@@ -2651,33 +2656,47 @@ function restCode(r, w) {
   if (w === 'jawwal' && sim === 'ooredoo') c = c.replace(/^\*110\*/, '*268*');
   return c;
 }
-var CATS = ['restaurants', 'pharmacies', 'offices', 'taxis', 'malls', 'stands'], restCat = 'all', restQ = '';
-function renderRests() {
-  var g = $('rgrid'); g.innerHTML = '';
+var CATS = ['restaurants', 'pharmacies', 'offices', 'taxis', 'malls', 'stands'], restCat = 'restaurants', restQ = '';
+var CATICON = {
+  restaurants: '<svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0f1c2e"/><g fill="none" stroke="#ffc20e" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13v10a5 5 0 0 0 10 0V13"/><path d="M25 28v23"/><path d="M43 51V13c-5 2-8 9-8 18h8"/></g></svg>'
+};
+var CATDEF = '<svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0f1c2e"/><g fill="none" stroke="#ffc20e" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 26l4-9h28l4 9"/><path d="M16 26v22h32V26"/><path d="M27 48V36h10v12"/></g></svg>';
+function setRestView(v) { $('restCats').hidden = v !== 'cats'; $('restShops').hidden = v !== 'shops'; $('restPick').hidden = v !== 'pick'; }
+function renderCats() {
+  var g = $('cgrid'); g.innerHTML = '';
   var used = CATS.filter(function (c) { return RESTS.some(function (r) { return r.cat === c; }); });
-  var cb = $('rcats'); cb.innerHTML = ''; cb.hidden = used.length < 2;
-  if (restCat !== 'all' && used.indexOf(restCat) < 0) restCat = 'all';
-  ['all'].concat(used).forEach(function (c) {
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'rcat'; b.textContent = tr('cat_' + c);
-    b.setAttribute('aria-pressed', c === restCat ? 'true' : 'false');
-    b.addEventListener('click', function () { restCat = c; renderRests(); });
-    cb.appendChild(b);
+  if (!used.length) { g.textContent = tr('restEmpty'); return; }
+  used.forEach(function (c) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'rc';
+    var ic = document.createElement('span'); ic.className = 'ci'; ic.innerHTML = CATICON[c] || CATDEF;
+    var nm = document.createElement('span'); nm.textContent = tr('cat_' + c);
+    var ct = document.createElement('span'); ct.className = 'rt'; ct.textContent = RESTS.filter(function (r) { return r.cat === c; }).length;
+    b.appendChild(ic); b.appendChild(nm); b.appendChild(ct);
+    b.addEventListener('click', function () { restCat = c; restQ = ''; $('rsearch').value = ''; renderShops(); setRestView('shops'); });
+    g.appendChild(b);
   });
-  $('rsearch').hidden = RESTS.length < 6;
+}
+function renderShops() {
+  var g = $('rgrid'); g.innerHTML = '';
+  $('rsTitle').textContent = tr('cat_' + restCat);
+  var inCat = RESTS.filter(function (r) { return r.cat === restCat; });
+  $('rsearch').hidden = inCat.length < 6;
   var q = restQ.trim().toLowerCase();
-  var list = RESTS.filter(function (r) { return (restCat === 'all' || r.cat === restCat) && (!q || r.name.toLowerCase().indexOf(q) > -1); });
+  var list = inCat.filter(function (r) { return !q || r.name.toLowerCase().indexOf(q) > -1; });
   if (!list.length) { g.textContent = tr('restEmpty'); return; }
   list.forEach(function (r) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'rc';
     var im = document.createElement('img'); im.className = 'rl'; im.alt = ''; im.src = r.logo;
     var nm = document.createElement('span'); nm.textContent = r.name;
-    var tg = document.createElement('span'); tg.className = 'rt'; tg.textContent = [tr('cat_' + r.cat), r.j ? tr('m_jawwal') : '', r.p ? tr('m_palpay') : ''].filter(Boolean).join(' · ');
+    var tg = document.createElement('span'); tg.className = 'rt'; tg.textContent = [r.j ? tr('m_jawwal') : '', r.p ? tr('m_palpay') : ''].filter(Boolean).join(' · ');
     b.appendChild(im); b.appendChild(nm); b.appendChild(tg);
     b.addEventListener('click', function () { openRest(r); });
     g.appendChild(b);
   });
 }
-$('rsearch').addEventListener('input', function () { restQ = this.value; renderRests(); });
+function renderRests() { renderCats(); renderShops(); }
+$('rsearch').addEventListener('input', function () { restQ = this.value; renderShops(); });
+$('rsBack').addEventListener('click', function () { setRestView('cats'); });
 function restLinks(r) {
   var box = $('rcon'); box.innerHTML = '';
   var ic = { ig: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>',
@@ -2691,7 +2710,7 @@ function restLinks(r) {
   });
   box.hidden = !box.children.length;
 }
-function restShowList() { $('restList').hidden = false; $('restPick').hidden = true; renderRests(); }
+function restShowList() { renderRests(); setRestView('cats'); }
 function openRest(r, w) {
   rest = r; restW = null;
   $('rpImg').src = r.logo; $('rpName').textContent = r.name; restLinks(r);
@@ -2704,7 +2723,7 @@ function openRest(r, w) {
   if (n === 1) restW = has.jawwal ? 'jawwal' : 'palpay';
   if (w && has[w]) restW = w;
   restPaint();
-  $('restList').hidden = true; $('restPick').hidden = false; show('rest');
+  restCat = r.cat; renderShops(); setRestView('pick'); show('rest');
 }
 function restPaint() {
   document.querySelectorAll('#rpM .m').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === restW ? 'true' : 'false'); });
@@ -2713,7 +2732,7 @@ function restPaint() {
 document.querySelectorAll('#rpM .m').forEach(function (b) {
   b.addEventListener('click', function () { if (b.disabled) return; restW = b.dataset.w; restPaint(); });
 });
-$('rpBack').addEventListener('click', restShowList);
+$('rpBack').addEventListener('click', function () { renderShops(); setRestView('shops'); });
 function showRestConfirm() {
   var code = restCode(rest, restW);
   if (!code) return;
