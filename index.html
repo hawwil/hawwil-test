@@ -415,6 +415,13 @@ input:focus,input:focus-visible{outline:none}
           <button class="m" type="button" data-w="jawwal" aria-pressed="false"><img id="rpJi" alt=""><span data-i18n="m_jawwal">جوال باي</span><small class="rna" hidden data-i18n="restNA">غير متاح</small></button>
           <button class="m" type="button" data-w="palpay" aria-pressed="false"><img id="rpPi" alt=""><span data-i18n="m_palpay">بال باي</span><small class="rna" hidden data-i18n="restNA">غير متاح</small></button>
         </div>
+        <div id="rpSim" hidden style="margin-top:14px">
+          <span class="lbl" data-i18n="simLbl" style="margin-bottom:4px">شريحتك</span>
+          <div class="seg3">
+            <button type="button" data-rsim="jawwal" data-i18n="simJ" aria-pressed="true">شريحة جوال</button>
+            <button type="button" data-rsim="ooredoo" data-i18n="simO" aria-pressed="false">شريحة أوريدو</button>
+          </div>
+        </div>
         <button class="go" id="rpGo" type="button" disabled style="margin-top:16px" data-i18n="cont">تابع</button>
         <button class="ghost" id="rpBack" type="button" style="margin-top:10px" data-i18n="back">رجوع</button>
       </div>
@@ -2745,7 +2752,12 @@ function openRest(r, w) {
 function restPaint() {
   document.querySelectorAll('#rpM .m').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === restW ? 'true' : 'false'); });
   $('rpGo').disabled = !restW;
+  $('rpSim').hidden = restW !== 'jawwal';
+  document.querySelectorAll('#rpSim button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.rsim === sim ? 'true' : 'false'); });
 }
+document.querySelectorAll('#rpSim button').forEach(function (b) {
+  b.addEventListener('click', function () { sim = b.dataset.rsim; store('sim', sim); restPaint(); });
+});
 document.querySelectorAll('#rpM .m').forEach(function (b) {
   b.addEventListener('click', function () { if (b.disabled) return; restW = b.dataset.w; restPaint(); });
 });
