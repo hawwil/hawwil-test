@@ -487,6 +487,16 @@ input:focus,input:focus-visible{outline:none}
       <p class="empty" id="histEmpty" data-i18n="histEmpty" hidden>لم يتم إجراء تحويلات. أول تحويل بتعمله رح يظهر هنا.</p>
     </section>
 
+    <section id="bkPanel" class="panel">
+      <h2 class="help-title" data-i18n="bkTitle">نسخ احتياطي</h2>
+      <p class="note" data-i18n="bkDesc" style="margin:10px 0 14px">بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت.</p>
+      <button class="go" id="bkCopy" type="button" data-i18n="bkCopy">انسخ بياناتي</button>
+      <textarea id="bkText" rows="7" spellcheck="false" autocomplete="off" data-i18n-ph="bkPlace" placeholder="هون بيطلع النص، أو الصق النص اللي نسخته من جهاز تاني" style="width:100%;margin-top:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:12px;font:13px/1.4 monospace;direction:ltr;text-align:left"></textarea>
+      <p class="note" id="bkMsg" style="min-height:22px;margin:8px 0"></p>
+      <button class="ghost" id="bkRestore" type="button" data-i18n="bkRestore">استرجاع من النص</button>
+      <button class="ghost" id="bkBack" type="button" style="margin-top:10px" data-i18n="back">رجوع</button>
+    </section>
+
     <section id="qrPanel" class="panel">
       <h2 class="help-title">رمز QR</h2>
       <div class="qrc" style="margin-top:12px">
@@ -535,6 +545,7 @@ input:focus,input:focus-visible{outline:none}
       <a class="cbtn ig" id="contact" href="#" target="_blank" rel="noopener"><span class="ig-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></span><span><b data-i18n="contact">تابعنا على إنستغرام</b><small>@nexa.ryx</small></span></a>
       <button class="cbtn ig" id="qrBtn" type="button"><span class="ig-ico" style="background:#0f1c2e"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffc20e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M21 17v4"/></svg></span><span><b>رمز QR</b><small>شارك حوّل · استقبل الدفع</small></span></button>
       <a class="cbtn ig" id="statsLink" href="https://hawwil.goatcounter.com/" target="_blank" rel="noopener"><span class="ig-ico" style="background:#0f1c2e"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffc20e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg></span><span><b>الإحصائيات</b><small>نسخة التجربة فقط</small></span></a>
+      <button class="cbtn" id="bkBtn" type="button" data-i18n="bkBtn">نسخ احتياطي واسترجاع</button>
       <button class="cbtn" id="hardRefresh" type="button" data-i18n="hardRef">تحديث التطبيق (مسح الكاش)</button>
       <button class="cbtn" id="report" type="button" data-i18n="reportBtn">بلّغ عن مشكلة</button>
       <button class="cbtn" id="replay" type="button" data-i18n="replay">شاهد الشرح مرة ثانية</button>
@@ -2163,7 +2174,7 @@ function showConfirm() {
   show('confirm');
 }
 function show(name) {
-  var map = { form: 'form', confirm: 'confirm', help: 'help', hist: 'histPanel', qr: 'qrPanel', rest: 'restPanel' };
+  var map = { form: 'form', confirm: 'confirm', help: 'help', hist: 'histPanel', bk: 'bkPanel', qr: 'qrPanel', rest: 'restPanel' };
   Object.keys(map).forEach(function (k) { $(map[k]).classList.toggle('on', k === name); });
   $('ctaForm').style.display = name === 'form' ? 'block' : 'none';
   $('ctaBack').style.display = name === 'confirm' ? 'block' : 'none';
@@ -2240,6 +2251,7 @@ $('back').addEventListener('click', function () {
 
 var I18N = {
   ar: {
+    bkBtn: 'نسخ احتياطي واسترجاع', bkTitle: 'نسخ احتياطي', bkDesc: 'بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت: انسخ بياناتك من هون، وافتح حوّل بالمكان التاني، والصق النص واضغط استرجاع.', bkCopy: 'انسخ بياناتي', bkPlace: 'هون بيطلع النص، أو الصق النص اللي نسخته من جهاز تاني', bkRestore: 'استرجاع من النص', bkConfirm: 'اضغط مرة تانية للتأكيد (بيستبدل اللي موجود هون)', bkCopied: 'انتسخ النص. الصقه بالمكان التاني.', bkShown: 'هاد النص، انسخه بإيدك.', bkBad: 'النص مش صحيح.', bkDone: 'تم الاسترجاع.', bkEmpty: 'ما في بيانات للنسخ.',
     restPayBtn: 'ادفع',     restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
     hardRef: 'تحديث التطبيق (مسح الكاش)', hardRefDone: 'تم. بيعيد التحميل...',
     tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', restWa: 'واتساب', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_pharmacies: 'صيدليات', cat_offices: 'مكاتب', cat_taxis: 'مكاتب تاكسيات', cat_malls: 'مراكز تسوق', cat_delivery: 'شركات التوصيل', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
@@ -2271,13 +2283,14 @@ var I18N = {
     q5: 'وين بتنحفظ التحويلات الأخيرة؟', a5: 'على جوالك بس، وبتقدر تمسحها بأي وقت من زر "مسح".',
     contact: 'تابعنا على إنستغرام', replay: 'شاهد الشرح مرة ثانية',
     fAll: 'الكل', fToday: 'اليوم', fRange: 'فترة محددة', fFrom: 'من', fTo: 'إلى', pf: 'من', pt: 'إلى', pu: 'حتى', sumAll: 'كل التحويلات', sumToday: 'تحويلات اليوم', sumSkip: 'مش محسوب: {n} دفع لتاجر بجوال باي (المبلغ بتكتبه بشاشة الشركة).', histNone: 'ما في تحويلات بهالفترة.', sumTotal: 'المجموع', oneT: 'تحويل', manyT: 'تحويلات',
-    tabSend: 'تحويل', tabHist: 'تحويلاتي', histNote: 'هنا بتظهر التحويلات اللي فتحت اتصالها. بتنحفظ 30 يوم وبعدها بتنمسح تلقائياً. تأكد من رسالة الشركة إنه التحويل تم.', purged: 'تم مسح {n} تحويل أقدم من 30 يوم تلقائياً.', ok: 'تمام', histEmpty: 'لم يتم إجراء تحويلات. أول تحويل بتعمله رح يظهر هنا.',
+    tabSend: 'تحويل', tabHist: 'تحويلاتي', histNote: 'هنا بتظهر التحويلات اللي فتحت اتصالها. بتضل محفوظة على جوالك لحد ما تمسحها بنفسك. تأكد من رسالة الشركة إنه التحويل تم.', purged: 'تم مسح {n} تحويل أقدم من 30 يوم تلقائياً.', ok: 'تمام', histEmpty: 'لم يتم إجراء تحويلات. أول تحويل بتعمله رح يظهر هنا.',
     copyBtn: 'نسخ', copied: 'تم النسخ', copyManual: 'انسخه يدوي', iosNote: 'على الآيفون: انسخ الكود، وافتح تطبيق الهاتف، والصقه واتصل.',
     delTitle: 'مسح كل التحويلات؟', delText: 'رح تنمسح {n} تحويل مسجّل على هالجوال، وما بتقدر ترجعهم.', delYes: 'نعم، امسح', delNo: 'لا، رجوع', delDone: 'تم مسح التحويلات',
     tagline: 'مساعد تحويل أموال', qTitle: 'تحويلاتي السريعة', qEditBtn: 'ترتيب/حذف', qAmt: 'تعديل المبلغ', qSave: 'احفظها كتحويلة سريعة', qSaved: 'انحفظت بالتحويلات السريعة', qDup: 'محفوظة من قبل', qFill: 'اكتب الرقم والمبلغ أول', qRm: 'حذف', recentLbl: 'آخر الأرقام', favEdit: 'ترتيب', favDone: 'تم', mvUp: 'تحريك للأعلى', mvDown: 'تحريك للأسفل', favRemove: 'إزالة من المفضلة', rmRecent: 'مسح الرقم من القائمة',  nx1: 'اضغط "تأكيد واتصال"', nx2: 'اكتب رمزك السري بشاشة الشركة. التطبيق ما بيشوفو.', nx3: 'كمّل الخطوات وأكّد التحويل',  bopSub: 'بيفتح قائمة البنك', bopStep: 'بعد الاتصال', bopNote: 'بنك فلسطين بيطلب الرمز السري أول شي. بعد ما يفتح الاتصال اكتب رمزك بشاشة البنك وكمّل الخطوات بنفسك. التطبيق ما بيشوف رمزك.', bopAfter: 'اكتب رمزك السري وكمّل بشاشة البنك',   favLbl: 'المفضلة', namePh: 'الاسم (اختياري)', favAria: 'إضافة للمفضلة', favMax: 'أقصى عدد للمفضلة 5. شيل واحد أول.', favNeed: 'اكتب الرقم أول', shareAria: 'مشاركة', shTitle: 'تحويل عبر حوّل', shTo: 'المستلم', shNum: 'الرقم', shAmt: 'المبلغ', shVia: 'الوسيلة',  clearAll: 'مسح كل السجل', delOne: 'مسح', delSure: 'متأكد؟',  reportBtn: 'بلّغ عن مشكلة', reportMsg: 'انسخت معلومات المشكلة. الصقها بالرسالة عنّا',  contactPick: 'اختيار من جهات الاتصال', errPickNo: 'ما لقينا رقم جوال صالح (059 أو 056) لهاي الجهة', updMsg: 'في تحديث جديد للتطبيق', updBtn: 'تحديث', helpAbout: 'حوّل مساعد تحويل أموال: بيجهّز كود التحويل ويفتح الاتصال. التحويل نفسه بيتم عبر جوال باي أو بال باي أو بنك فلسطين، والتطبيق ما بيحرّك مصاري ولا بيخزّن أي رمز سري.', disc: 'حوّل أداة مساعدة وليست جهة مالية. التحويل يتم من خلال جوال باي أو بال باي أو بنك فلسطين.',
     credit: 'تم التطوير من', creditSfx: 'للخدمات الرقمية', shekel: 'شيكل', payMerchant: 'دفع لتاجر', afterPin: 'بعد الرمز السري'
   },
   en: {
+    bkBtn: 'Backup & restore', bkTitle: 'Backup', bkDesc: 'Move your history and favorites to another phone or the installed app: copy your data here, open Hawwil on the other side, paste the text and tap restore.', bkCopy: 'Copy my data', bkPlace: 'The text appears here, or paste text copied from another device', bkRestore: 'Restore from text', bkConfirm: 'Tap again to confirm (replaces what is here)', bkCopied: 'Copied. Paste it on the other side.', bkShown: 'Here is the text. Copy it manually.', bkBad: 'The text is not valid.', bkDone: 'Restored.', bkEmpty: 'No data to copy.',
     restPayBtn: 'Pay',     restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
     hardRef: 'Refresh app (clear cache)', hardRefDone: 'Done. Reloading...',
     tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', restWa: 'WhatsApp', cat_all: 'All', cat_restaurants: 'Restaurants', cat_pharmacies: 'Pharmacies', cat_offices: 'Offices', cat_taxis: 'Taxi offices', cat_malls: 'Shopping centers', cat_delivery: 'Delivery companies', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
@@ -2309,7 +2322,7 @@ var I18N = {
     q5: 'Where are recent transfers saved?', a5: 'Only on your phone. You can clear them anytime with the “Clear” button.',
     contact: 'Follow us on Instagram', replay: 'Watch the intro again',
     fAll: 'All', fToday: 'Today', fRange: 'Custom range', fFrom: 'From', fTo: 'To', pf: 'From', pt: 'to', pu: 'Until', sumAll: 'All transfers', sumToday: 'Today’s transfers', sumSkip: 'Not counted: {n} Jawwal Pay merchant payment(s) (you enter the amount on the provider’s screen).', histNone: 'No transfers in this period.', sumTotal: 'Total', oneT: 'transfer', manyT: 'transfers',
-    tabSend: 'Send', tabHist: 'My transfers', histNote: 'Transfers whose call you opened show up here. They are kept for 30 days, then deleted automatically. Check the provider’s message to confirm it went through.', purged: '{n} transfer(s) older than 30 days were deleted automatically.', ok: 'OK', histEmpty: 'No transfers yet. Your first transfer will show up here.',
+    tabSend: 'Send', tabHist: 'My transfers', histNote: 'Transfers whose call you opened show up here. They stay saved on your phone until you delete them yourself. Check the provider’s message to confirm it went through.', purged: '{n} transfer(s) older than 30 days were deleted automatically.', ok: 'OK', histEmpty: 'No transfers yet. Your first transfer will show up here.',
     copyBtn: 'Copy', copied: 'Copied', copyManual: 'Copy it manually', iosNote: 'On iPhone: copy the code, open the Phone app, paste it and call.',
     delTitle: 'Delete all transfers?', delText: '{n} transfer(s) saved on this phone will be deleted. This can’t be undone.', delYes: 'Yes, delete', delNo: 'No, go back', delDone: 'Transfers deleted',
     tagline: 'Money transfer assistant', qTitle: 'Quick transfers', qEditBtn: 'Reorder/Delete', qAmt: 'Edit amount', qSave: 'Save as quick transfer', qSaved: 'Saved to quick transfers', qDup: 'Already saved', qFill: 'Enter number and amount first', qRm: 'Delete', recentLbl: 'Recent numbers', favEdit: 'Reorder', favDone: 'Done', mvUp: 'Move up', mvDown: 'Move down', favRemove: 'Remove from favorites', rmRecent: 'Remove number from list',  nx1: 'Tap “Confirm and call”', nx2: 'Enter your PIN on the provider’s screen. The app never sees it.', nx3: 'Follow the steps and confirm the transfer',  bopSub: 'Opens the bank menu', bopStep: 'After the call', bopNote: 'Bank of Palestine asks for your PIN first. After the call opens, enter your PIN on the bank screen and continue the steps yourself. The app never sees your PIN.', bopAfter: 'Enter your PIN and continue on the bank screen',   favLbl: 'Favorites', namePh: 'Name (optional)', favAria: 'Add to favorites', favMax: 'Max 5 favorites. Remove one first.', favNeed: 'Enter the number first', shareAria: 'Share', shTitle: 'Transfer via Hawwil', shTo: 'To', shNum: 'Number', shAmt: 'Amount', shVia: 'Method',  clearAll: 'Clear all history', delOne: 'Delete', delSure: 'Sure?',  reportBtn: 'Report a problem', reportMsg: 'Problem details copied. Paste them in the message to us',  contactPick: 'Pick from contacts', errPickNo: 'No valid mobile number (059 or 056) found for this contact', updMsg: 'A new version is available', updBtn: 'Update', helpAbout: 'Hawwil is a money transfer assistant: it prepares the transfer code and opens the dialer. The transfer itself is made through Jawwal Pay, PalPay or Bank of Palestine. The app never moves money or stores any PIN.', disc: 'Hawwil is a helper tool, not a financial institution. Transfers are made through Jawwal Pay, PalPay or Bank of Palestine.',
@@ -2363,17 +2376,13 @@ function fmt(d) { d = String(d); return d.slice(0, 3) + ' ' + d.slice(3, 6) + ' 
 function getHist() { try { var a = JSON.parse(load('hist') || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
 function pushHist(item) {
   var list = getHist(); list.unshift(item);
-  store('hist', JSON.stringify(list.slice(0, 30)));
+  store('hist', JSON.stringify(list.slice(0, 1000)));
 }
-var KEEP_DAYS = 30;   // مدة حفظ التحويلات قبل ما تنمسح تلقائياً
-function purgeHist() {
-  var list = getHist(), now = Date.now(), limit = KEEP_DAYS * 86400000, kept = [], removed = 0, changed = false;
-  list.forEach(function (x) {
-    if (!x.t) { x.t = now; changed = true; }
-    if (now - x.t > limit) { removed++; changed = true; } else kept.push(x);
-  });
-  if (changed) store('hist', JSON.stringify(kept));
-  if (removed) store('purged', String((parseInt(load('purged') || '0', 10) || 0) + removed));
+function purgeHist() {   // ما بنمسح تلقائياً. بس بنكتب وقت للتحويلات القديمة اللي ما إلها وقت
+  var list = getHist(), now = Date.now(), changed = false;
+  list.forEach(function (x) { if (!x.t) { x.t = now; changed = true; } });
+  if (changed) store('hist', JSON.stringify(list));
+  if (load('purged') && load('purged') !== '0') store('purged', '0');   // نظّف تنبيه المسح القديم
 }
 function whenShare(ts) {
   try {
@@ -2850,6 +2859,30 @@ function qrPaint() {
   document.querySelectorAll('#qrW button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === qrW ? 'true' : 'false'); });
   document.querySelectorAll('#qrT button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === qrT ? 'true' : 'false'); });
 }
+
+// ----- نسخ احتياطي / استرجاع -----
+var BK_KEYS = ['hist', 'book', 'rhide', 'quick', 'sim', 'method', 'to', 'pf'], bkArm = false;
+function bkMsg(k) { $('bkMsg').textContent = tr(k); }
+$('bkBtn').addEventListener('click', function () { $('bkText').value = ''; $('bkMsg').textContent = ''; bkArm = false; $('bkRestore').textContent = tr('bkRestore'); show('bk'); });
+$('bkBack').addEventListener('click', function () { show('help'); });
+$('bkCopy').addEventListener('click', function () {
+  var d = {}, n = 0;
+  BK_KEYS.forEach(function (k) { var v = load(k); if (typeof v === 'string' && v) { d[k] = v; n++; } });
+  if (!n) { $('bkText').value = ''; bkMsg('bkEmpty'); return; }
+  var t = JSON.stringify({ hawwil: 1, d: d }); $('bkText').value = t;
+  function manual() { var ta = $('bkText'); ta.focus(); ta.select(); try { ta.setSelectionRange(0, t.length); } catch (e) {} var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} bkMsg(ok ? 'bkCopied' : 'bkShown'); }
+  try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { bkMsg('bkCopied'); }, manual); return; } } catch (e) {}
+  manual();
+});
+$('bkText').addEventListener('input', function () { bkArm = false; $('bkRestore').textContent = tr('bkRestore'); });
+$('bkRestore').addEventListener('click', function () {
+  var o = null; try { o = JSON.parse($('bkText').value.trim()); } catch (e) {}
+  if (!o || o.hawwil !== 1 || !o.d || typeof o.d !== 'object') { bkArm = false; this.textContent = tr('bkRestore'); bkMsg('bkBad'); return; }
+  if (!bkArm) { bkArm = true; this.textContent = tr('bkConfirm'); $('bkMsg').textContent = ''; return; }
+  BK_KEYS.forEach(function (k) { if (typeof o.d[k] === 'string') store(k, o.d[k]); });
+  bkArm = false; bkMsg('bkDone'); this.textContent = tr('bkRestore');
+  setTimeout(function () { location.reload(); }, 700);
+});
 $('qrBtn').addEventListener('click', function () { show('qr'); });
 $('qrBack').addEventListener('click', function () { show('help'); });
 document.querySelectorAll('#qrW button').forEach(function (b) { b.addEventListener('click', function () { qrW = b.dataset.w; qrPaint(); $('qrOut').hidden = true; }); });
