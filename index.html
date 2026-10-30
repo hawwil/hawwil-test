@@ -487,6 +487,26 @@ input:focus,input:focus-visible{outline:none}
       <p class="empty" id="histEmpty" data-i18n="histEmpty" hidden>لم يتم إجراء تحويلات. أول تحويل بتعمله رح يظهر هنا.</p>
     </section>
 
+    <section id="acPanel" class="panel">
+      <h2 class="help-title" data-i18n="acTitle">حسابي</h2>
+      <div id="acOut">
+        <p class="note" data-i18n="acDesc" style="margin:10px 0 12px">سجّل دخول بيوزر وباسورد، وسجلك والمفضلة بيظهروا من أي جهاز. بياناتك بتتشفّر بجوالك قبل ما تنحفظ.</p>
+        <input id="acUser" type="text" maxlength="32" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-ph="acUser" placeholder="اليوزر (اللي بتحبه)" style="width:100%;margin-bottom:8px">
+        <input id="acPass" type="password" maxlength="64" autocomplete="off" data-i18n-ph="acPass" placeholder="الباسورد" style="width:100%;margin-bottom:8px">
+        <p class="note" data-i18n="acWarn" style="margin:4px 0 10px">انتبه: إذا نسيت الباسورد ما في طريقة نرجّع بياناتك. اكتبه بمكان آمن. وما تستخدم باسورد البنك أو المحفظة.</p>
+        <button class="go" id="acLogin" type="button" data-i18n="acLogin">دخول</button>
+        <button class="ghost" id="acReg" type="button" style="margin-top:10px" data-i18n="acReg">إنشاء حساب جديد</button>
+      </div>
+      <div id="acIn" hidden>
+        <p class="note" id="acWho" style="margin:10px 0 12px;font-weight:700"></p>
+        <button class="go" id="acPush" type="button" data-i18n="acPush">احفظ على حسابي الآن</button>
+        <button class="ghost" id="acPull" type="button" style="margin-top:10px" data-i18n="acPull">اجلب من حسابي</button>
+        <button class="ghost" id="acLogout" type="button" style="margin-top:10px" data-i18n="acLogout">تسجيل خروج</button>
+      </div>
+      <p class="note" id="acMsg" style="min-height:22px;margin:10px 0"></p>
+      <button class="ghost" id="acBack" type="button" data-i18n="back">رجوع</button>
+    </section>
+
     <section id="bkPanel" class="panel">
       <h2 class="help-title" data-i18n="bkTitle">نسخ احتياطي</h2>
       <p class="note" data-i18n="bkDesc" style="margin:10px 0 14px">بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت.</p>
@@ -546,6 +566,7 @@ input:focus,input:focus-visible{outline:none}
       <a class="cbtn ig" id="contact" href="#" target="_blank" rel="noopener"><span class="ig-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></span><span><b data-i18n="contact">تابعنا على إنستغرام</b><small>@nexa.ryx</small></span></a>
       <button class="cbtn ig" id="qrBtn" type="button"><span class="ig-ico" style="background:#0f1c2e"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffc20e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M21 17v4"/></svg></span><span><b>رمز QR</b><small>شارك حوّل · استقبل الدفع</small></span></button>
       <a class="cbtn ig" id="statsLink" href="https://hawwil.goatcounter.com/" target="_blank" rel="noopener"><span class="ig-ico" style="background:#0f1c2e"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffc20e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg></span><span><b>الإحصائيات</b><small>نسخة التجربة فقط</small></span></a>
+      <button class="cbtn" id="acBtn" type="button" data-i18n="acBtn">حسابي (تسجيل دخول)</button>
       <button class="cbtn" id="bkBtn" type="button" data-i18n="bkBtn">نسخ احتياطي واسترجاع</button>
       <button class="cbtn" id="hardRefresh" type="button" data-i18n="hardRef">تحديث التطبيق (مسح الكاش)</button>
       <button class="cbtn" id="report" type="button" data-i18n="reportBtn">بلّغ عن مشكلة</button>
@@ -2182,7 +2203,7 @@ function showConfirm() {
   show('confirm');
 }
 function show(name) {
-  var map = { form: 'form', confirm: 'confirm', help: 'help', hist: 'histPanel', bk: 'bkPanel', qr: 'qrPanel', rest: 'restPanel' };
+  var map = { form: 'form', confirm: 'confirm', help: 'help', hist: 'histPanel', bk: 'bkPanel', ac: 'acPanel', qr: 'qrPanel', rest: 'restPanel' };
   Object.keys(map).forEach(function (k) { $(map[k]).classList.toggle('on', k === name); });
   $('ctaForm').style.display = name === 'form' ? 'block' : 'none';
   $('ctaBack').style.display = name === 'confirm' ? 'block' : 'none';
@@ -2259,6 +2280,7 @@ $('back').addEventListener('click', function () {
 
 var I18N = {
   ar: {
+    acBtn: 'حسابي (تسجيل دخول)', acTitle: 'حسابي', acDesc: 'سجّل دخول بيوزر وباسورد، وسجلك والمفضلة بيظهروا من أي جهاز. بياناتك بتتشفّر بجوالك قبل ما تنحفظ.', acUser: 'اليوزر (اللي بتحبه)', acPass: 'الباسورد', acWarn: 'انتبه: إذا نسيت الباسورد ما في طريقة نرجّع بياناتك. اكتبه بمكان آمن. وما تستخدم باسورد البنك أو المحفظة.', acLogin: 'دخول', acReg: 'إنشاء حساب جديد', acPush: 'احفظ على حسابي الآن', acPull: 'اجلب من حسابي', acLogout: 'تسجيل خروج', acWho: 'داخل باسم: {u}', acFill: 'اكتب اليوزر والباسورد (الباسورد 6 أحرف أو أكتر)', acBusy: 'لحظة...', acTaken: 'هاد اليوزر مأخوذ، جرّب غيره', acBad: 'اليوزر أو الباسورد مش صح', acNet: 'ما زبط الاتصال، تأكد من الإنترنت', acSaved: 'انحفظ على حسابك', acPulled: 'انجلبت بياناتك', acCreated: 'انعمل الحساب. بياناتك رح تنحفظ لحالها', acNoCrypto: 'المتصفح ما بيدعم التشفير', acOutDone: 'تم تسجيل الخروج. بياناتك بقيت على الجهاز',
     bkLink: 'شارك رابط الاسترجاع', bkLinkCopied: 'انتسخ الرابط. الصقه بالواتساب لحالك، وافتحه بالجهاز التاني.', bkTooBig: 'البيانات كبيرة للرابط. استخدم زر انسخ بياناتي.', bkAskT: 'استرجاع البيانات؟', bkAskP: 'هاد الرابط فيه سجل تحويلات ومفضلة. إذا كمّلت، بتستبدل اللي موجود بهالجهاز.', bkAskGo: 'استرجاع', bkAskNo: 'إلغاء', bkLinkBad: 'رابط الاسترجاع مش صحيح.',
     bkBtn: 'نسخ احتياطي واسترجاع', bkTitle: 'نسخ احتياطي', bkDesc: 'بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت: انسخ بياناتك من هون، وافتح حوّل بالمكان التاني، والصق النص واضغط استرجاع.', bkCopy: 'انسخ بياناتي', bkPlace: 'هون بيطلع النص، أو الصق النص اللي نسخته من جهاز تاني', bkRestore: 'استرجاع من النص', bkConfirm: 'اضغط مرة تانية للتأكيد (بيستبدل اللي موجود هون)', bkCopied: 'انتسخ النص. الصقه بالمكان التاني.', bkShown: 'هاد النص، انسخه بإيدك.', bkBad: 'النص مش صحيح.', bkDone: 'تم الاسترجاع.', bkEmpty: 'ما في بيانات للنسخ.',
     restPayBtn: 'ادفع',     restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
@@ -2299,6 +2321,7 @@ var I18N = {
     credit: 'تم التطوير من', creditSfx: 'للخدمات الرقمية', shekel: 'شيكل', payMerchant: 'دفع لتاجر', afterPin: 'بعد الرمز السري'
   },
   en: {
+    acBtn: 'My account (sign in)', acTitle: 'My account', acDesc: 'Sign in with a username and password and your history and favorites show up on any device. Your data is encrypted on your phone before it is saved.', acUser: 'Username (anything you like)', acPass: 'Password', acWarn: 'Careful: if you forget the password we cannot recover your data. Keep it somewhere safe, and never reuse a bank or wallet password.', acLogin: 'Sign in', acReg: 'Create new account', acPush: 'Save to my account now', acPull: 'Fetch from my account', acLogout: 'Sign out', acWho: 'Signed in as: {u}', acFill: 'Enter username and password (6+ characters)', acBusy: 'One moment...', acTaken: 'That username is taken, try another', acBad: 'Wrong username or password', acNet: 'Could not connect, check your internet', acSaved: 'Saved to your account', acPulled: 'Your data was fetched', acCreated: 'Account created. Your data will save automatically', acNoCrypto: 'This browser does not support encryption', acOutDone: 'Signed out. Your data stays on this device',
     bkLink: 'Share restore link', bkLinkCopied: 'Link copied. Paste it in WhatsApp to yourself and open it on the other device.', bkTooBig: 'Too much data for a link. Use Copy my data.', bkAskT: 'Restore data?', bkAskP: 'This link has your history and favorites. If you continue, it replaces what is on this device.', bkAskGo: 'Restore', bkAskNo: 'Cancel', bkLinkBad: 'The restore link is not valid.',
     bkBtn: 'Backup & restore', bkTitle: 'Backup', bkDesc: 'Move your history and favorites to another phone or the installed app: copy your data here, open Hawwil on the other side, paste the text and tap restore.', bkCopy: 'Copy my data', bkPlace: 'The text appears here, or paste text copied from another device', bkRestore: 'Restore from text', bkConfirm: 'Tap again to confirm (replaces what is here)', bkCopied: 'Copied. Paste it on the other side.', bkShown: 'Here is the text. Copy it manually.', bkBad: 'The text is not valid.', bkDone: 'Restored.', bkEmpty: 'No data to copy.',
     restPayBtn: 'Pay',     restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
@@ -2947,6 +2970,113 @@ $('bkAskNo').addEventListener('click', function () { $('bkAsk').hidden = true; b
 $('bkAskGo').addEventListener('click', function () {
   if (bkApply(bkPending)) { $('bkAsk').hidden = true; bkPending = ''; location.reload(); } else { $('bkAsk').hidden = true; toast(tr('bkLinkBad')); }
 });
+
+// ----- حسابي: مزامنة مشفّرة -----
+var SYNC_URL = 'https://hawwil-sync.aboreda.workers.dev';
+var acS = null, acTimer = 0, acBlock = false;
+function acLoad() { try { var s = JSON.parse(load('acct') || 'null'); acS = (s && s.id && s.k && s.key) ? s : null; } catch (e) { acS = null; } }
+function acMsg(t) { $('acMsg').textContent = t || ''; }
+function acView() {
+  $('acOut').hidden = !!acS; $('acIn').hidden = !acS;
+  if (acS) $('acWho').textContent = tr('acWho').replace('{u}', acS.u);
+}
+function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
+function acDerive(user, pass) {
+  var enc = new TextEncoder(), u = user.trim().toLowerCase();
+  if (!window.crypto || !crypto.subtle) return Promise.reject(new Error('nocrypto'));
+  return Promise.all([
+    crypto.subtle.digest('SHA-256', enc.encode('hawwil-user:' + u)),
+    crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveBits'])
+  ]).then(function (r) {
+    return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: enc.encode('hawwil:' + u), iterations: 150000, hash: 'SHA-256' }, r[1], 512).then(function (bits) {
+      var a = new Uint8Array(bits);
+      return { u: user.trim(), id: hex(r[0]), key: b64u(a.slice(0, 32)), k: hex(a.slice(32)) };
+    });
+  });
+}
+function acCall(path, body) {
+  return fetch(SYNC_URL + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(function (r) {
+    return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; });
+  });
+}
+function acAes(s) { return crypto.subtle.importKey('raw', unb64u(s.key), 'AES-GCM', false, ['encrypt', 'decrypt']); }
+function acEncrypt(s, text) {
+  var iv = crypto.getRandomValues(new Uint8Array(12));
+  return acAes(s).then(function (k) { return crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, k, new TextEncoder().encode(text)); }).then(function (ct) {
+    var c = new Uint8Array(ct), all = new Uint8Array(12 + c.length); all.set(iv, 0); all.set(c, 12); return b64u(all);
+  });
+}
+function acDecrypt(s, code) {
+  var all = unb64u(code);
+  return acAes(s).then(function (k) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: all.slice(0, 12) }, k, all.slice(12)); }).then(function (pt) { return new TextDecoder().decode(pt); });
+}
+function acPushNow() {
+  if (!acS) return Promise.resolve(false);
+  var t = bkJson(); if (!t) return Promise.resolve(true);
+  return acEncrypt(acS, t).then(function (d) { return acCall('/save', { u: acS.id, k: acS.k, d: d }); }).then(function (r) { return !!r.ok; });
+}
+function acSchedule() {
+  if (!acS || acBlock) return;
+  clearTimeout(acTimer); acTimer = setTimeout(function () { acPushNow().catch(function () {}); }, 2500);
+}
+function acMerge(text, remoteWins) {   // بيدمج بيانات الحساب مع اللي على الجهاز
+  var o = null; try { o = JSON.parse(text); } catch (e) {}
+  if (!o || o.hawwil !== 1 || !o.d) return false;
+  acBlock = true;
+  try {
+    BK_KEYS.forEach(function (k) {
+      var rv = o.d[k]; if (typeof rv !== 'string') return;
+      var lv = load(k);
+      if (!lv) { store(k, rv); return; }
+      if (k === 'hist') {
+        var a = [], b = [], seen = {}, out = [];
+        try { a = JSON.parse(lv); b = JSON.parse(rv); } catch (e) { return; }
+        a.concat(b).forEach(function (x) { var id = JSON.stringify(x); if (!seen[id]) { seen[id] = 1; out.push(x); } });
+        out.sort(function (x, y) { return (y.t || 0) - (x.t || 0); });
+        store('hist', JSON.stringify(out.slice(0, 1000))); return;
+      }
+      try {
+        var lo = JSON.parse(lv), ro = JSON.parse(rv);
+        if (lo && ro && typeof lo === 'object' && typeof ro === 'object' && !Array.isArray(lo) && !Array.isArray(ro)) {
+          store(k, JSON.stringify(remoteWins ? Object.assign({}, lo, ro) : Object.assign({}, ro, lo))); return;
+        }
+      } catch (e) {}
+      if (remoteWins) store(k, rv);
+    });
+  } finally { acBlock = false; }
+  return true;
+}
+function acPull(remoteWins) {
+  return acCall('/login', { u: acS.id, k: acS.k }).then(function (r) {
+    if (!r.ok) throw new Error(r.e || 'net');
+    if (!r.d) return false;
+    return acDecrypt(acS, r.d).then(function (t) { return acMerge(t, remoteWins); });
+  });
+}
+function acErr(e) { var m = e && e.message; acMsg(tr(m === 'taken' ? 'acTaken' : m === 'auth' ? 'acBad' : m === 'nocrypto' ? 'acNoCrypto' : 'acNet')); }
+function acGo(reg) {
+  var u = $('acUser').value.trim(), p = $('acPass').value;
+  if (!u || p.length < 6) { acMsg(tr('acFill')); return; }
+  acMsg(tr('acBusy'));
+  acDerive(u, p).then(function (s) {
+    var step = reg ? acCall('/register', { u: s.id, k: s.k }).then(function (r) { if (!r.ok) throw new Error(r.e || 'net'); }) : Promise.resolve();
+    return step.then(function () { acS = s; return acPull(true); }).then(function () {
+      store('acct', JSON.stringify(acS)); $('acPass').value = '';
+      return acPushNow();
+    }).then(function () { acView(); acMsg(tr(reg ? 'acCreated' : 'acPulled')); setTimeout(function () { location.reload(); }, 900); });
+  }).catch(function (e) { acS = null; acErr(e); });
+}
+$('acBtn').addEventListener('click', function () { acLoad(); acMsg(''); acView(); show('ac'); });
+$('acBack').addEventListener('click', function () { show('help'); });
+$('acLogin').addEventListener('click', function () { acGo(false); });
+$('acReg').addEventListener('click', function () { acGo(true); });
+$('acPush').addEventListener('click', function () { acMsg(tr('acBusy')); acPushNow().then(function (ok) { acMsg(tr(ok ? 'acSaved' : 'acNet')); }).catch(acErr); });
+$('acPull').addEventListener('click', function () { acMsg(tr('acBusy')); acPull(true).then(function () { acMsg(tr('acPulled')); setTimeout(function () { location.reload(); }, 800); }).catch(acErr); });
+$('acLogout').addEventListener('click', function () { try { localStorage.removeItem('test.acct'); } catch (e) {} acS = null; acView(); acMsg(tr('acOutDone')); });
+var _store = store;
+store = function (k, v) { _store(k, v); if (BK_KEYS.indexOf(k) > -1) acSchedule(); };
+acLoad();
+if (acS) acPull(false).catch(function () {});
 $('qrBtn').addEventListener('click', function () { show('qr'); });
 $('qrBack').addEventListener('click', function () { show('help'); });
 document.querySelectorAll('#qrW button').forEach(function (b) { b.addEventListener('click', function () { qrW = b.dataset.w; qrPaint(); $('qrOut').hidden = true; }); });
