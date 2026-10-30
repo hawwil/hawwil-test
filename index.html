@@ -490,7 +490,8 @@ input:focus,input:focus-visible{outline:none}
     <section id="bkPanel" class="panel">
       <h2 class="help-title" data-i18n="bkTitle">نسخ احتياطي</h2>
       <p class="note" data-i18n="bkDesc" style="margin:10px 0 14px">بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت.</p>
-      <button class="go" id="bkCopy" type="button" data-i18n="bkCopy">انسخ بياناتي</button>
+      <button class="go" id="bkLink" type="button" data-i18n="bkLink">شارك رابط الاسترجاع</button>
+      <button class="ghost" id="bkCopy" type="button" data-i18n="bkCopy" style="margin-top:10px">انسخ بياناتي</button>
       <textarea id="bkText" rows="7" spellcheck="false" autocomplete="off" data-i18n-ph="bkPlace" placeholder="هون بيطلع النص، أو الصق النص اللي نسخته من جهاز تاني" style="width:100%;margin-top:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:12px;font:13px/1.4 monospace;direction:ltr;text-align:left"></textarea>
       <p class="note" id="bkMsg" style="min-height:22px;margin:8px 0"></p>
       <button class="ghost" id="bkRestore" type="button" data-i18n="bkRestore">استرجاع من النص</button>
@@ -569,6 +570,13 @@ input:focus,input:focus-visible{outline:none}
   <p>تأكد إن الاسم والرقم صح قبل ما تكمل. الرمز ممكن يكون من أي حدا، وحوّل ما بتحرّك مصاري لحالها.</p>
   <button class="go" id="lnkGo" type="button">متابعة</button>
   <button class="ghost" id="lnkNo" type="button" style="margin-top:10px">إلغاء</button>
+</div></div>
+
+<div class="lnk" id="bkAsk" hidden role="dialog" aria-modal="true"><div class="lnk-card">
+  <h3 data-i18n="bkAskT">استرجاع البيانات؟</h3>
+  <p data-i18n="bkAskP">هاد الرابط فيه سجل تحويلات ومفضلة. إذا كمّلت، بتستبدل اللي موجود بهالجهاز.</p>
+  <button class="go" id="bkAskGo" type="button" data-i18n="bkAskGo">استرجاع</button>
+  <button class="ghost" id="bkAskNo" type="button" style="margin-top:10px" data-i18n="bkAskNo">إلغاء</button>
 </div></div>
 
 <div class="onb" id="onb" hidden role="dialog" aria-modal="true">
@@ -2251,6 +2259,7 @@ $('back').addEventListener('click', function () {
 
 var I18N = {
   ar: {
+    bkLink: 'شارك رابط الاسترجاع', bkLinkCopied: 'انتسخ الرابط. الصقه بالواتساب لحالك، وافتحه بالجهاز التاني.', bkTooBig: 'البيانات كبيرة للرابط. استخدم زر انسخ بياناتي.', bkAskT: 'استرجاع البيانات؟', bkAskP: 'هاد الرابط فيه سجل تحويلات ومفضلة. إذا كمّلت، بتستبدل اللي موجود بهالجهاز.', bkAskGo: 'استرجاع', bkAskNo: 'إلغاء', bkLinkBad: 'رابط الاسترجاع مش صحيح.',
     bkBtn: 'نسخ احتياطي واسترجاع', bkTitle: 'نسخ احتياطي', bkDesc: 'بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت: انسخ بياناتك من هون، وافتح حوّل بالمكان التاني، والصق النص واضغط استرجاع.', bkCopy: 'انسخ بياناتي', bkPlace: 'هون بيطلع النص، أو الصق النص اللي نسخته من جهاز تاني', bkRestore: 'استرجاع من النص', bkConfirm: 'اضغط مرة تانية للتأكيد (بيستبدل اللي موجود هون)', bkCopied: 'انتسخ النص. الصقه بالمكان التاني.', bkShown: 'هاد النص، انسخه بإيدك.', bkBad: 'النص مش صحيح.', bkDone: 'تم الاسترجاع.', bkEmpty: 'ما في بيانات للنسخ.',
     restPayBtn: 'ادفع',     restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
     hardRef: 'تحديث التطبيق (مسح الكاش)', hardRefDone: 'تم. بيعيد التحميل...',
@@ -2290,6 +2299,7 @@ var I18N = {
     credit: 'تم التطوير من', creditSfx: 'للخدمات الرقمية', shekel: 'شيكل', payMerchant: 'دفع لتاجر', afterPin: 'بعد الرمز السري'
   },
   en: {
+    bkLink: 'Share restore link', bkLinkCopied: 'Link copied. Paste it in WhatsApp to yourself and open it on the other device.', bkTooBig: 'Too much data for a link. Use Copy my data.', bkAskT: 'Restore data?', bkAskP: 'This link has your history and favorites. If you continue, it replaces what is on this device.', bkAskGo: 'Restore', bkAskNo: 'Cancel', bkLinkBad: 'The restore link is not valid.',
     bkBtn: 'Backup & restore', bkTitle: 'Backup', bkDesc: 'Move your history and favorites to another phone or the installed app: copy your data here, open Hawwil on the other side, paste the text and tap restore.', bkCopy: 'Copy my data', bkPlace: 'The text appears here, or paste text copied from another device', bkRestore: 'Restore from text', bkConfirm: 'Tap again to confirm (replaces what is here)', bkCopied: 'Copied. Paste it on the other side.', bkShown: 'Here is the text. Copy it manually.', bkBad: 'The text is not valid.', bkDone: 'Restored.', bkEmpty: 'No data to copy.',
     restPayBtn: 'Pay',     restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
     hardRef: 'Refresh app (clear cache)', hardRefDone: 'Done. Reloading...',
@@ -2883,6 +2893,60 @@ $('bkRestore').addEventListener('click', function () {
   bkArm = false; bkMsg('bkDone'); this.textContent = tr('bkRestore');
   setTimeout(function () { location.reload(); }, 700);
 });
+
+function bkJson() {
+  var d = {}, n = 0;
+  BK_KEYS.forEach(function (k) { var v = load(k); if (typeof v === 'string' && v) { d[k] = v; n++; } });
+  return n ? JSON.stringify({ hawwil: 1, d: d }) : '';
+}
+function b64u(bytes) { var s = ''; for (var i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+function unb64u(t) { t = t.replace(/-/g, '+').replace(/_/g, '/'); while (t.length % 4) t += '='; var s = atob(t), b = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) b[i] = s.charCodeAt(i); return b; }
+function bkPack(text) {
+  var raw = new TextEncoder().encode(text);
+  if (window.CompressionStream) {
+    return new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer().then(function (ab) { return 'z' + b64u(new Uint8Array(ab)); }, function () { return 'p' + b64u(raw); });
+  }
+  return Promise.resolve('p' + b64u(raw));
+}
+function bkUnpack(code) {
+  var kind = code.charAt(0), bytes = unb64u(code.slice(1));
+  if (kind === 'p') return Promise.resolve(new TextDecoder().decode(bytes));
+  if (kind === 'z' && window.DecompressionStream) return new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text();
+  return Promise.reject(new Error('bad'));
+}
+function bkApply(text) {
+  var o = null; try { o = JSON.parse(text); } catch (e) {}
+  if (!o || o.hawwil !== 1 || !o.d || typeof o.d !== 'object') return false;
+  BK_KEYS.forEach(function (k) { if (typeof o.d[k] === 'string') store(k, o.d[k]); });
+  return true;
+}
+$('bkLink').addEventListener('click', function () {
+  var t = bkJson(); if (!t) { bkMsg('bkEmpty'); return; }
+  bkPack(t).then(function (code) {
+    var url = location.origin + location.pathname + '#bk=' + code;
+    if (url.length > 20000) { bkMsg('bkTooBig'); return; }
+    $('bkText').value = url;
+    if (navigator.share) { navigator.share({ url: url }).catch(function () {}); return; }
+    function manual() { var ta = $('bkText'); ta.focus(); ta.select(); try { ta.setSelectionRange(0, url.length); } catch (e) {} var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} bkMsg(ok ? 'bkLinkCopied' : 'bkShown'); }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(function () { bkMsg('bkLinkCopied'); }, manual); return; } } catch (e) {}
+    manual();
+  });
+});
+var bkPending = '';
+function bkOpen() {
+  var h = location.hash || ''; if (h.indexOf('#bk=') !== 0) return;
+  var code = h.slice(4);
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  bkUnpack(code).then(function (text) {
+    var o = null; try { o = JSON.parse(text); } catch (e) {}
+    if (!o || o.hawwil !== 1) throw new Error('bad');
+    bkPending = text; $('bkAsk').hidden = false;
+  }).catch(function () { toast(tr('bkLinkBad')); });
+}
+$('bkAskNo').addEventListener('click', function () { $('bkAsk').hidden = true; bkPending = ''; });
+$('bkAskGo').addEventListener('click', function () {
+  if (bkApply(bkPending)) { $('bkAsk').hidden = true; bkPending = ''; location.reload(); } else { $('bkAsk').hidden = true; toast(tr('bkLinkBad')); }
+});
 $('qrBtn').addEventListener('click', function () { show('qr'); });
 $('qrBack').addEventListener('click', function () { show('help'); });
 document.querySelectorAll('#qrW button').forEach(function (b) { b.addEventListener('click', function () { qrW = b.dataset.w; qrPaint(); $('qrOut').hidden = true; }); });
@@ -2937,6 +3001,7 @@ $('lnkGo').addEventListener('click', function () {
   }
   if (!load('seen')) openOnb();
   lnkOpen();
+  bkOpen();
 })();
 </script>
 </body>
