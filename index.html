@@ -2818,7 +2818,8 @@ function openRest(r, w) {
   $('rpImg').src = restLogo(r); $('rpName').textContent = r.name; restLinks(r);
   var mi = $('methods');
   $('rpJi').src = mi.querySelector('[data-id=jawwal] img').src; $('rpPi').src = mi.querySelector('[data-id=palpay] img').src;
-  var has = { jawwal: !!(r.j || r.jp), palpay: !!(r.p || r.pp) }, n = (has.jawwal ? 1 : 0) + (has.palpay ? 1 : 0);
+  var DIR_PAY = false;   // الدفع من الدليل مقفول (خليه true لو بدنا نرجعه). بيانات الدفع محفوظة بالمحلات
+  var has = DIR_PAY ? { jawwal: !!(r.j || r.jp), palpay: !!(r.p || r.pp) } : { jawwal: false, palpay: false }, n = (has.jawwal ? 1 : 0) + (has.palpay ? 1 : 0);
   document.querySelectorAll('#rpM .m').forEach(function (b) {
     var ok = has[b.dataset.w]; b.disabled = !ok; b.querySelector('.rna').hidden = ok;
   });
