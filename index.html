@@ -3037,44 +3037,49 @@ function acDecrypt(s, code) {
 function acPushNow() {
   if (!acS) return Promise.resolve(false);
   var t = bkJson(); if (!t) return Promise.resolve(true);
-  return acEncrypt(acS, t).then(function (d) { return acCall('/save', { u: acS.id, k: acS.k, d: d }); }).then(function (r) { return !!r.ok; });
+  return acEncrypt(acS, t).then(function (d) { return acCall('/save', { u: acS.id, k: acS.k, d: d }); }).then(function (r) { if (r.ok) acSaveSession(Date.now()); return !!r.ok; });
 }
 function acSchedule() {
   if (!acS || acBlock) return;
   clearTimeout(acTimer); acTimer = setTimeout(function () { acPushNow().catch(function () {}); }, 2500);
 }
-function acMerge(text, remoteWins) {   // بيدمج بيانات الحساب مع اللي على الجهاز
+function acMerge(text, remoteWins) {   // بيدمج بيانات الحساب مع اللي على الجهاز. بيرجع true إذا تغيّر شي
   var o = null; try { o = JSON.parse(text); } catch (e) {}
   if (!o || o.hawwil !== 1 || !o.d) return false;
+  var changed = false, ls = (acS && acS.ls) || 0;
   acBlock = true;
   try {
     BK_KEYS.forEach(function (k) {
       var rv = o.d[k]; if (typeof rv !== 'string') return;
-      var lv = load(k);
-      if (!lv) { store(k, rv); return; }
-      if (k === 'hist') {
+      var lv = load(k), nv = null;
+      if (!lv) nv = rv;
+      else if (k === 'hist') {
         var a = [], b = [], seen = {}, out = [];
         try { a = JSON.parse(lv); b = JSON.parse(rv); } catch (e) { return; }
-        a.concat(b).forEach(function (x) { var id = JSON.stringify(x); if (!seen[id]) { seen[id] = 1; out.push(x); } });
+        // لو الحساب أحدث: اللي انحذف هناك بينحذف هون، وبنحافظ على تحويلاتنا الجديدة اللي لسا ما انرفعت
+        var base = remoteWins && ls ? b.concat(a.filter(function (x) { return (x.t || 0) > ls; })) : a.concat(b);
+        base.forEach(function (x) { var id = JSON.stringify(x); if (!seen[id]) { seen[id] = 1; out.push(x); } });
         out.sort(function (x, y) { return (y.t || 0) - (x.t || 0); });
-        store('hist', JSON.stringify(out.slice(0, 1000))); return;
+        nv = JSON.stringify(out.slice(0, 1000));
+      } else {
+        try {
+          var lo = JSON.parse(lv), ro = JSON.parse(rv);
+          if (lo && ro && typeof lo === 'object' && typeof ro === 'object' && !Array.isArray(lo) && !Array.isArray(ro)) nv = JSON.stringify(remoteWins ? ro : Object.assign({}, ro, lo));
+          else if (remoteWins) nv = rv;
+        } catch (e) { if (remoteWins) nv = rv; }
       }
-      try {
-        var lo = JSON.parse(lv), ro = JSON.parse(rv);
-        if (lo && ro && typeof lo === 'object' && typeof ro === 'object' && !Array.isArray(lo) && !Array.isArray(ro)) {
-          store(k, JSON.stringify(remoteWins ? Object.assign({}, lo, ro) : Object.assign({}, ro, lo))); return;
-        }
-      } catch (e) {}
-      if (remoteWins) store(k, rv);
+      if (nv !== null && nv !== lv) { store(k, nv); changed = true; }
     });
   } finally { acBlock = false; }
-  return true;
+  return changed;
 }
-function acPull(remoteWins) {
+function acSaveSession(t) { acS.ls = t || Date.now(); store('acct', JSON.stringify(acS)); }
+function acPull(force) {   // force = جلب كامل (دخول أو زر اجلب). غير هيك بنجلب فقط إذا الحساب اتحدّث من جهاز تاني
   return acCall('/login', { u: acS.id, k: acS.k }).then(function (r) {
     if (!r.ok) throw new Error(r.e || 'net');
-    if (!r.d) return false;
-    return acDecrypt(acS, r.d).then(function (t) { return acMerge(t, remoteWins); });
+    var newer = !acS.ls || (r.t || 0) > acS.ls;
+    if (!r.d || (!force && !newer)) return false;
+    return acDecrypt(acS, r.d).then(function (t) { var ch = acMerge(t, true); acSaveSession(Date.now()); return ch; });
   });
 }
 function acErr(e) { var m = e && e.message; acMsg(tr(m === 'taken' ? 'acTaken' : m === 'auth' ? 'acBad' : m === 'nocrypto' ? 'acNoCrypto' : 'acNet')); }
@@ -3104,7 +3109,9 @@ $('acLogout').addEventListener('click', function () { try { localStorage.removeI
 var _store = store;
 store = function (k, v) { _store(k, v); if (BK_KEYS.indexOf(k) > -1) acSchedule(); };
 acLoad(); acView();
-if (acS) acPull(false).catch(function () {});
+function acAuto() { if (acS) acPull(false).then(function (ch) { if (ch) location.reload(); }).catch(function () {}); }
+acAuto();
+document.addEventListener('visibilitychange', function () { if (!document.hidden) acAuto(); });
 $('qrBtn').addEventListener('click', function () { show('qr'); });
 $('qrBack').addEventListener('click', function () { show('help'); });
 document.querySelectorAll('#qrW button').forEach(function (b) { b.addEventListener('click', function () { qrW = b.dataset.w; qrPaint(); $('qrOut').hidden = true; }); });
