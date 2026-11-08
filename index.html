@@ -160,7 +160,7 @@ details p{margin:0 0 12px;color:var(--muted);font-size:14px}
 .lnk{position:fixed;inset:0;z-index:70;background:rgba(10,18,30,.72);display:flex;align-items:center;justify-content:center;padding:20px}.lnk[hidden]{display:none}
 .lnk-card{background:var(--surface);color:var(--ink);border-radius:20px;padding:22px 18px;width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .lnk-card h3{margin:0 0 4px;font-size:18px}.lnk-card .who{font-size:26px;font-weight:800;margin:10px 0 2px;word-break:break-word}.lnk-card .num{direction:ltr;font-size:22px;font-weight:700;letter-spacing:.5px}.lnk-card .via{display:inline-block;margin:10px 0;background:var(--track);border-radius:999px;padding:4px 14px;font-weight:700;font-size:14px}.lnk-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:6px 0 14px}
-.tabs{grid-template-columns:repeat(3,1fr)!important}
+.tabs{grid-template-columns:repeat(4,1fr)!important}.tabs button{font-size:13.5px;padding:6px 3px;line-height:1.2}
 .rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:6px}
 .rc{background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:16px;padding:16px 8px 14px;font:inherit;font-weight:800;font-size:15px;cursor:pointer;text-align:center;box-shadow:var(--shadow)}
 .rc:active{transform:scale(.98)}
@@ -354,6 +354,28 @@ input:focus,input:focus-visible{outline:none}
 .toast.upd{animation:pin .3s ease-out}
 @media (prefers-reduced-motion: reduce){.panel.on,#confirm.on .receipt,.toast.upd{animation:none!important}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+.aidchips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
+.aidchips button{background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;font-size:13.5px;cursor:pointer;min-height:38px}
+.aidchips button[aria-pressed="true"]{background:var(--yellow);color:var(--on-yellow);border-color:var(--yellow)}
+.aidc{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px;margin:0 0 12px}
+.aidc b{display:block;font-size:17px;line-height:1.35}
+.aidc .adesc{margin:6px 0 0;font-size:14px;color:var(--muted);line-height:1.55}
+.abadges{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.abadges span{background:var(--track);border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:700}
+.ameta{display:flex;flex-wrap:wrap;gap:4px 14px;margin:10px 0 0;font-size:12.5px;color:var(--muted);font-weight:600}
+.ameta .avr{color:#17703d;font-weight:700}.ameta .due{color:var(--warn)}
+.aopen{display:flex;align-items:center;justify-content:center;text-decoration:none;background:var(--yellow);color:var(--on-yellow);border-radius:12px;padding:11px;font-weight:800;font-size:15px;margin-top:12px;min-height:46px}
+.aidchk{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px;margin:18px 0 0}
+.aidchk b{display:block;font-size:16px;margin-bottom:8px}
+.aidchk .row{display:flex;gap:8px}.aidchk input{flex:1;min-width:0;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;direction:ltr;min-height:46px}
+.aidchk button{border:0;background:var(--ink);color:var(--bg);border-radius:12px;padding:0 18px;font:inherit;font-weight:800;cursor:pointer;min-height:46px}
+.aidres{margin-top:10px;border-radius:12px;padding:10px 12px;font-size:14.5px;font-weight:700;line-height:1.55}.aidres[hidden]{display:none}
+.aidres.ok{background:#e3f6ea;color:#14633a}.aidres.warn{background:var(--warn-bg);color:var(--warn)}.aidres.bad{background:#fde4e1;color:#a3271d}.aidres.info{background:var(--track);color:var(--ink)}
+.aidempty{text-align:center;color:var(--muted);padding:24px 8px;font-weight:700}
+.aidupd{font-size:12.5px;color:var(--muted);margin:0 0 10px;font-weight:600}
+:root[data-theme="dark"] .ameta .avr{color:#5fd08a}:root[data-theme="dark"] .aidres.ok{background:#12301f;color:#7be0a2}:root[data-theme="dark"] .aidres.bad{background:#3a1613;color:#ff9a90}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ameta .avr{color:#5fd08a}:root:not([data-theme="light"]) .aidres.ok{background:#12301f;color:#7be0a2}:root:not([data-theme="light"]) .aidres.bad{background:#3a1613;color:#ff9a90}}
 </style>
 </head>
 <body>
@@ -366,7 +388,7 @@ input:focus,input:focus-visible{outline:none}
 <path d="M402 262 L262 396" stroke="url(#my2)" stroke-width="84" transform="translate(0 4)"/></g></g></svg></span><span class="bt"><span data-i18n="brand">حوّل</span><small class="tag" data-i18n="tagline">مساعد تحويل أموال</small></span></div>
     <div class="tools"><button class="lang" id="lang" type="button">EN</button><button class="theme" id="theme" type="button" data-i18n-aria="themeAria" aria-label="تبديل العرض نهاري أو ليلي"></button><button class="theme" id="acTop" type="button" data-i18n-aria="acTitle" aria-label="حسابي"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button><button class="theme" id="helpBtn" type="button" data-i18n-aria="help" aria-label="مساعدة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></svg></button></div>
   </header>
-  <nav class="tabs" id="tabs"><button type="button" id="tabForm" aria-pressed="true" data-i18n="tabSend">تحويل</button><button type="button" id="tabHist" aria-pressed="false" data-i18n="tabHist">تحويلاتي</button><button type="button" id="tabRest" aria-pressed="false" data-i18n="tabRest">الدليل</button></nav>
+  <nav class="tabs" id="tabs"><button type="button" id="tabForm" aria-pressed="true" data-i18n="tabSend">تحويل</button><button type="button" id="tabHist" aria-pressed="false" data-i18n="tabHist">تحويلاتي</button><button type="button" id="tabRest" aria-pressed="false" data-i18n="tabRest">الدليل</button><button type="button" id="tabAid" aria-pressed="false" data-i18n="tabAid">روابط المساعدات</button></nav>
 
   <main>
     <section id="form" class="panel on">
@@ -454,6 +476,19 @@ input:focus,input:focus-visible{outline:none}
       <p class="rdisc" data-i18n="restDisc">حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.</p>
     </section>
 
+    <section id="aidPanel" class="panel">
+      <span class="lbl stp" data-i18n="aidPick">اختار نوع المساعدة</span>
+      <div class="aidchips" id="aidChips"></div>
+      <p class="aidupd" id="aidUpd"></p>
+      <div id="aidList"></div>
+      <div class="aidchk">
+        <b data-i18n="aidChkT">افحص رابط قبل ما تفتحه</b>
+        <div class="row"><input id="aidChk" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-ph="aidChkPh" placeholder="https://"><button id="aidChkBtn" type="button" data-i18n="aidChkBtn">افحص</button></div>
+        <div class="aidres" id="aidRes" hidden></div>
+      </div>
+      <p class="rdisc" data-i18n="aidNote">حوّل بيعرض روابط تسجيل راجعناها يدوياً، وما بيطلب منك أي بيانات. لا تعطي هويتك أو بياناتك إلا لجهة رسمية بتعرفها، وحوّل مش جهة مساعدات.</p>
+    </section>
+
     <section id="confirm" class="panel">
       <div class="receipt">
         <div class="r-top">
@@ -515,8 +550,8 @@ input:focus,input:focus-visible{outline:none}
       <div class="acard" id="acOut">
         <div class="aic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <p class="adesc" data-i18n="acDesc">سجّل دخول وسجلك والمفضلة بيظهروا من أي جهاز.</p>
-        <label class="alab" for="acUser" data-i18n="acUserL">اليوزر</label>
-        <input class="ain" id="acUser" type="text" maxlength="24" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" dir="ltr" data-i18n-ph="acUser" placeholder="abu_reda1">
+        <label class="alab" for="acUser" data-i18n="acUserL">اسم المستخدم</label>
+        <input class="ain" id="acUser" type="text" maxlength="24" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" dir="ltr" data-i18n-ph="acUser" placeholder="اكتب اسم المستخدم">
         <span class="ahint" data-i18n="acUserH">حروف أو أرقام أو الاتنين، بدون مسافات</span>
         <label class="alab" for="acPass" data-i18n="acPassL">الباسورد</label>
         <div class="apw"><input class="ain" id="acPass" type="password" maxlength="64" autocomplete="off" dir="ltr" data-i18n-ph="acPass" placeholder="٦ أحرف أو أكتر"><button class="aeye" id="acEye" type="button" data-i18n-aria="acEye" aria-label="إظهار الباسورد"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
@@ -2233,11 +2268,13 @@ function showConfirm() {
   show('confirm');
 }
 function show(name) {
-  var map = { form: 'form', confirm: 'confirm', help: 'help', hist: 'histPanel', bk: 'bkPanel', ac: 'acPanel', qr: 'qrPanel', rest: 'restPanel' };
+  var map = { form: 'form', confirm: 'confirm', help: 'help', hist: 'histPanel', bk: 'bkPanel', ac: 'acPanel', qr: 'qrPanel', rest: 'restPanel', aid: 'aidPanel' };
   Object.keys(map).forEach(function (k) { $(map[k]).classList.toggle('on', k === name); });
   $('ctaForm').style.display = name === 'form' ? 'block' : 'none';
   $('ctaBack').style.display = name === 'confirm' ? 'block' : 'none';
-  $('tabs').hidden = !(name === 'form' || name === 'hist' || name === 'rest');
+  $('tabs').hidden = !(name === 'form' || name === 'hist' || name === 'rest' || name === 'aid');
+  $('tabAid').setAttribute('aria-pressed', name === 'aid' ? 'true' : 'false');
+  if (name === 'aid') { renderAid(); aidFetch(); }
   $('tabRest').setAttribute('aria-pressed', name === 'rest' ? 'true' : 'false');
   $('tabForm').setAttribute('aria-pressed', name === 'form' ? 'true' : 'false');
   $('tabHist').setAttribute('aria-pressed', name === 'hist' ? 'true' : 'false');
@@ -2311,13 +2348,13 @@ $('back').addEventListener('click', function () {
 var I18N = {
   ar: {
     ph_restaurants: 'ابحث عن مطعم', ph_cafes: 'ابحث عن كافيه', ph_pharmacies: 'ابحث عن صيدلية', ph_library: 'ابحث عن مكتبة', ph_meats: 'ابحث عن محل لحوم', ph_clothes: 'ابحث عن محل ملابس أو أحذية', ph_packaging: 'ابحث عن مستلزمات تغليف', ph_gateaux: 'ابحث عن محل جاتوهات', ph_supermarkets: 'ابحث عن سوبرماركت', ph_offices: 'ابحث عن مكتب', ph_taxis: 'ابحث عن مكتب تاكسيات', ph_malls: 'ابحث عن مول', ph_delivery: 'ابحث عن شركة توصيل', ph_stands: 'ابحث عن بسطة',
-    acBtn: 'حسابي (تسجيل دخول)', acTitle: 'حسابي', acDesc: 'سجّل دخول وسجلك والمفضلة بيظهروا من أي جهاز. بياناتك بتتشفّر بجوالك قبل ما تنحفظ.', acUser: 'abu_reda1', acUserL: 'اليوزر', acUserH: 'حروف أو أرقام أو الاتنين، بدون مسافات', acPassL: 'الباسورد', acPass: '٦ أحرف أو أكتر', acEye: 'إظهار الباسورد', acAuto: 'المزامنة شغالة تلقائياً', acWarn: 'إذا نسيت الباسورد ما في طريقة نرجّع بياناتك، اكتبه بمكان آمن. وما تستخدم باسورد البنك أو المحفظة.', acLogin: 'دخول', acReg: 'إنشاء حساب جديد', acPush: 'احفظ على حسابي الآن', acPull: 'اجلب من حسابي', acLogout: 'تسجيل خروج', acWho: 'داخل باسم: {u}', acFill: 'اكتب اليوزر والباسورد (الباسورد 6 أحرف أو أكتر)', acBusy: 'لحظة...', acTaken: 'هاد اليوزر مأخوذ، جرّب غيره', acBad: 'اليوزر أو الباسورد مش صح', acNet: 'ما زبط الاتصال، تأكد من الإنترنت', acSaved: 'انحفظ على حسابك', acPulled: 'انجلبت بياناتك', acCreated: 'انعمل الحساب. بياناتك رح تنحفظ لحالها', acNoCrypto: 'المتصفح ما بيدعم التشفير', acOutDone: 'تم تسجيل الخروج. بياناتك بقيت على الجهاز',
+    acBtn: 'حسابي (تسجيل دخول)', acTitle: 'حسابي', acDesc: 'سجّل دخول وسجلك والمفضلة بيظهروا من أي جهاز. بياناتك بتتشفّر بجوالك قبل ما تنحفظ.', acUser: 'اكتب اسم المستخدم', acUserL: 'اسم المستخدم', acUserH: 'حروف أو أرقام أو الاتنين، بدون مسافات', acPassL: 'الباسورد', acPass: '٦ أحرف أو أكتر', acEye: 'إظهار الباسورد', acAuto: 'المزامنة شغالة تلقائياً', acWarn: 'إذا نسيت الباسورد ما في طريقة نرجّع بياناتك، اكتبه بمكان آمن. وما تستخدم باسورد البنك أو المحفظة.', acLogin: 'دخول', acReg: 'إنشاء حساب جديد', acPush: 'احفظ على حسابي الآن', acPull: 'اجلب من حسابي', acLogout: 'تسجيل خروج', acWho: 'داخل باسم: {u}', acFill: 'اكتب اسم المستخدم والباسورد (الباسورد 6 أحرف أو أكتر)', acBusy: 'لحظة...', acTaken: 'اسم المستخدم هاد مأخوذ، جرّب غيره', acBad: 'اسم المستخدم أو الباسورد مش صح', acNet: 'ما زبط الاتصال، تأكد من الإنترنت', acSaved: 'انحفظ على حسابك', acPulled: 'انجلبت بياناتك', acCreated: 'انعمل الحساب. بياناتك رح تنحفظ لحالها', acNoCrypto: 'المتصفح ما بيدعم التشفير', acOutDone: 'تم تسجيل الخروج. بياناتك بقيت على الجهاز',
     bkLink: 'شارك رابط الاسترجاع', bkLinkCopied: 'انتسخ الرابط. الصقه بالواتساب لحالك، وافتحه بالجهاز التاني.', bkTooBig: 'البيانات كبيرة للرابط. استخدم زر انسخ بياناتي.', bkAskT: 'استرجاع البيانات؟', bkAskP: 'هاد الرابط فيه سجل تحويلات ومفضلة. إذا كمّلت، بتستبدل اللي موجود بهالجهاز.', bkAskGo: 'استرجاع', bkAskNo: 'إلغاء', bkLinkBad: 'رابط الاسترجاع مش صحيح.',
     bkBtn: 'نسخ احتياطي واسترجاع', bkTitle: 'نسخ احتياطي', bkDesc: 'بتنقل سجل تحويلاتك والمفضلة لجوال تاني أو لتطبيق التثبيت: انسخ بياناتك من هون، وافتح حوّل بالمكان التاني، والصق النص واضغط استرجاع.', bkCopy: 'انسخ بياناتي', bkPlace: 'هون بيطلع النص، أو الصق النص اللي نسخته من جهاز تاني', bkRestore: 'استرجاع من النص', bkConfirm: 'اضغط مرة تانية للتأكيد (بيستبدل اللي موجود هون)', bkCopied: 'انتسخ النص. الصقه بالمكان التاني.', bkShown: 'هاد النص، انسخه بإيدك.', bkBad: 'النص مش صحيح.', bkDone: 'تم الاسترجاع.', bkEmpty: 'ما في بيانات للنسخ.',
     restPayBtn: 'ادفع',     restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
     hardRef: 'تحديث التطبيق (مسح الكاش)', hardRefDone: 'تم. بيعيد التحميل...',
     rpinOn: 'تثبيت', rpinOff: 'إلغاء التثبيت',
-    tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', restWa: 'واتساب', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_cafes: 'كافيهات وحلويات', cat_pharmacies: 'صيدليات', cat_library: 'مكتبات وقرطاسية', cat_meats: 'لحوم ومجمدات', cat_clothes: 'ملابس وأحذية', cat_packaging: 'مستلزمات التغليف', cat_gateaux: 'جاتوهات', cat_supermarkets: 'سوبرماركت', cat_offices: 'مكاتب', cat_taxis: 'مكاتب تاكسيات', cat_malls: 'مولات تجارية', cat_delivery: 'شركات التوصيل', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
+    tabAid: 'روابط المساعدات', aidPick: 'اختار نوع المساعدة', aidAll: 'الكل', aidOpen: 'افتح رابط التسجيل', aidVer: 'تم التحقق', aidDue: 'آخر موعد', aidUpd: 'آخر مراجعة للروابط', aidEmpty: 'ما في روابط شغالة بهالنوع هلأ.', aidChkT: 'افحص رابط قبل ما تفتحه', aidChkPh: 'الصق الرابط هون', aidChkBtn: 'افحص', aidNote: 'حوّل بيعرض روابط تسجيل راجعناها يدوياً، وما بيطلب منك أي بيانات. لا تعطي هويتك أو بياناتك إلا لجهة رسمية بتعرفها، وحوّل مش جهة مساعدات.', aidR_empty: 'الصق الرابط أول.', aidR_ok: '✅ رابط موثق: ', aidR_end: '⚠️ رابط معروف، بس التسجيل منتهي: ', aidR_bad: '❌ رابط نصب معروف. لا تفتحه ولا تكتب أي بيانات.', aidR_host: '⚠️ نفس موقع الجهة اللي بقائمتنا، بس هاد الرابط بالذات مش عندنا. تأكد منه قبل ما تكتب بياناتك: ', aidR_unk: 'ℹ️ الرابط مش موجود بقائمتنا. هاد ما يعني إنه نصب، بس لا تعطي بياناتك إلا لجهة بتعرفها.', tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', restWa: 'واتساب', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_cafes: 'كافيهات وحلويات', cat_pharmacies: 'صيدليات', cat_library: 'مكتبات وقرطاسية', cat_meats: 'لحوم ومجمدات', cat_clothes: 'ملابس وأحذية', cat_packaging: 'مستلزمات التغليف', cat_gateaux: 'جاتوهات', cat_supermarkets: 'سوبرماركت', cat_offices: 'مكاتب', cat_taxis: 'مكاتب تاكسيات', cat_malls: 'مولات تجارية', cat_delivery: 'شركات التوصيل', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
     brand: 'حوّل', themeAria: 'تبديل العرض نهاري أو ليلي', offline: 'بدون إنترنت',
     payTo: 'بدك تدفع إلى', driver: 'سائق', merchant: 'تاجر', friend: 'صديق',
     payMethod: 'اختار وسيلة الدفع', m_jawwal: 'جوال باي', m_palpay: 'بال باي', m_bop: 'بنك فلسطين', soon: 'قريباً',
@@ -2354,13 +2391,13 @@ var I18N = {
   },
   en: {
     ph_restaurants: 'Search restaurants', ph_cafes: 'Search cafes', ph_pharmacies: 'Search pharmacies', ph_library: 'Search bookstores', ph_meats: 'Search meat shops', ph_clothes: 'Search clothing or shoe stores', ph_packaging: 'Search packaging shops', ph_gateaux: 'Search cake shops', ph_supermarkets: 'Search supermarkets', ph_offices: 'Search offices', ph_taxis: 'Search taxi offices', ph_malls: 'Search malls', ph_delivery: 'Search delivery companies', ph_stands: 'Search stands',
-    acBtn: 'My account (sign in)', acTitle: 'My account', acDesc: 'Sign in and your history and favorites show up on any device. Your data is encrypted on your phone before it is saved.', acUser: 'abu_reda1', acUserL: 'Username', acUserH: 'Letters, numbers or both, no spaces', acPassL: 'Password', acPass: '6+ characters', acEye: 'Show password', acAuto: 'Auto-sync is on', acWarn: 'If you forget the password we cannot recover your data. Keep it somewhere safe, and never reuse a bank or wallet password.', acLogin: 'Sign in', acReg: 'Create new account', acPush: 'Save to my account now', acPull: 'Fetch from my account', acLogout: 'Sign out', acWho: 'Signed in as: {u}', acFill: 'Enter username and password (6+ characters)', acBusy: 'One moment...', acTaken: 'That username is taken, try another', acBad: 'Wrong username or password', acNet: 'Could not connect, check your internet', acSaved: 'Saved to your account', acPulled: 'Your data was fetched', acCreated: 'Account created. Your data will save automatically', acNoCrypto: 'This browser does not support encryption', acOutDone: 'Signed out. Your data stays on this device',
+    acBtn: 'My account (sign in)', acTitle: 'My account', acDesc: 'Sign in and your history and favorites show up on any device. Your data is encrypted on your phone before it is saved.', acUser: 'Enter your username', acUserL: 'Username', acUserH: 'Letters, numbers or both, no spaces', acPassL: 'Password', acPass: '6+ characters', acEye: 'Show password', acAuto: 'Auto-sync is on', acWarn: 'If you forget the password we cannot recover your data. Keep it somewhere safe, and never reuse a bank or wallet password.', acLogin: 'Sign in', acReg: 'Create new account', acPush: 'Save to my account now', acPull: 'Fetch from my account', acLogout: 'Sign out', acWho: 'Signed in as: {u}', acFill: 'Enter username and password (6+ characters)', acBusy: 'One moment...', acTaken: 'That username is taken, try another', acBad: 'Wrong username or password', acNet: 'Could not connect, check your internet', acSaved: 'Saved to your account', acPulled: 'Your data was fetched', acCreated: 'Account created. Your data will save automatically', acNoCrypto: 'This browser does not support encryption', acOutDone: 'Signed out. Your data stays on this device',
     bkLink: 'Share restore link', bkLinkCopied: 'Link copied. Paste it in WhatsApp to yourself and open it on the other device.', bkTooBig: 'Too much data for a link. Use Copy my data.', bkAskT: 'Restore data?', bkAskP: 'This link has your history and favorites. If you continue, it replaces what is on this device.', bkAskGo: 'Restore', bkAskNo: 'Cancel', bkLinkBad: 'The restore link is not valid.',
     bkBtn: 'Backup & restore', bkTitle: 'Backup', bkDesc: 'Move your history and favorites to another phone or the installed app: copy your data here, open Hawwil on the other side, paste the text and tap restore.', bkCopy: 'Copy my data', bkPlace: 'The text appears here, or paste text copied from another device', bkRestore: 'Restore from text', bkConfirm: 'Tap again to confirm (replaces what is here)', bkCopied: 'Copied. Paste it on the other side.', bkShown: 'Here is the text. Copy it manually.', bkBad: 'The text is not valid.', bkDone: 'Restored.', bkEmpty: 'No data to copy.',
     restPayBtn: 'Pay',     restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
     hardRef: 'Refresh app (clear cache)', hardRefDone: 'Done. Reloading...',
     rpinOn: 'Pin', rpinOff: 'Unpin',
-    tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', restWa: 'WhatsApp', cat_all: 'All', cat_restaurants: 'Restaurants', cat_cafes: 'Cafes & sweets', cat_pharmacies: 'Pharmacies', cat_library: 'Books & stationery', cat_meats: 'Meat & frozen', cat_clothes: 'Clothing & shoes', cat_packaging: 'Packaging supplies', cat_gateaux: 'Cakes', cat_supermarkets: 'Supermarkets', cat_offices: 'Offices', cat_taxis: 'Taxi offices', cat_malls: 'Shopping malls', cat_delivery: 'Delivery companies', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
+    tabAid: 'Aid links', aidPick: 'Choose the type of aid', aidAll: 'All', aidOpen: 'Open registration link', aidVer: 'Verified', aidDue: 'Deadline', aidUpd: 'Links last reviewed', aidEmpty: 'No open links for this type right now.', aidChkT: 'Check a link before opening it', aidChkPh: 'Paste the link here', aidChkBtn: 'Check', aidNote: 'Hawwil lists registration links we reviewed by hand and never asks you for any data. Only give your ID or personal details to an official body you know. Hawwil is not an aid organization.', aidR_empty: 'Paste the link first.', aidR_ok: '✅ Verified link: ', aidR_end: '⚠️ Known link, but registration has ended: ', aidR_bad: '❌ Known scam link. Do not open it or enter any data.', aidR_host: '⚠️ Same site as an organization on our list, but this exact link is not on it. Double-check before entering your data: ', aidR_unk: 'ℹ️ This link is not on our list. That does not mean it is a scam, but only give your data to a body you know.', tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', restWa: 'WhatsApp', cat_all: 'All', cat_restaurants: 'Restaurants', cat_cafes: 'Cafes & sweets', cat_pharmacies: 'Pharmacies', cat_library: 'Books & stationery', cat_meats: 'Meat & frozen', cat_clothes: 'Clothing & shoes', cat_packaging: 'Packaging supplies', cat_gateaux: 'Cakes', cat_supermarkets: 'Supermarkets', cat_offices: 'Offices', cat_taxis: 'Taxi offices', cat_malls: 'Shopping malls', cat_delivery: 'Delivery companies', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
     brand: 'Hawwil', themeAria: 'Switch day or night mode', offline: 'Works offline',
     payTo: 'Pay to', driver: 'Driver', merchant: 'Merchant', friend: 'Friend',
     payMethod: 'Choose payment method', m_jawwal: 'Jawwal Pay', m_palpay: 'PalPay', m_bop: 'Bank of Palestine', soon: 'Soon',
@@ -2430,7 +2467,7 @@ function applyLang(l) {
   document.querySelectorAll('[data-i18n-aria]').forEach(function (el) { el.setAttribute('aria-label', tr(el.getAttribute('data-i18n-aria'))); });
   $('lang').textContent = $('onbLang').textContent = l === 'ar' ? 'EN' : 'عربي';
   document.title = tr('brand');
-  clr(); paint(); renderConfirm(); renderHist(); renderOnb();
+  clr(); paint(); renderConfirm(); renderHist(); renderOnb(); if (typeof renderAid === 'function') renderAid();
 }
 $('lang').addEventListener('click', function () {
   var l = lang === 'ar' ? 'en' : 'ar';
@@ -2600,7 +2637,7 @@ $('dial').addEventListener('click', function () {
   track('transfer-' + method + (last.merchant ? '-merchant' : ''));
 });
 document.querySelectorAll('#tabs button').forEach(function (b) {
-  b.addEventListener('click', function () { if (b.id === 'tabRest') { restShowList(); show('rest'); } else show(b.id === 'tabHist' ? 'hist' : 'form'); });
+  b.addEventListener('click', function () { if (b.id === 'tabRest') { restShowList(); show('rest'); } else if (b.id === 'tabAid') show('aid'); else show(b.id === 'tabHist' ? 'hist' : 'form'); });
 });
 
 // ----- شاشة التعريف + المساعدة -----
@@ -2744,6 +2781,136 @@ $('hardRefresh').addEventListener('click', function () {
   try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) { return Promise.all(rs.filter(function (r) { return r.scope.indexOf('/hawwil-test/') > -1; }).map(function (r) { return r.unregister(); })); })); } catch (e) {}
   Promise.all(jobs).catch(function () {}).then(function () { setTimeout(function () { location.reload(); }, 600); });
 });
+
+// ----- المساعدات -----
+var AID_URL = '';   // رابط CSV المنشور من Google Sheets (فاضي = النسخة المدمجة بس)
+var AID_SNAP = [{"o": "برنامج الأغذية العالمي (WFP)", "c": "💵 مساعدات نقدية", "u": "https://pal.beneficiaryregistration.cbt.wfp.org/form/consent", "d": "مساعدة نقدية لكل الأسر، مع أولوية للأرامل وذوي الإعاقة والأمراض المزمنة", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "برنامج الأغذية العالمي (WFP)", "c": "🍞 طرود غذائية", "u": "https://pal.beneficiaryregistration.cbt.wfp.org/form/consent", "d": "مساعدة غذائية لكل الأسر، مع أولوية للأرامل وذوي الإعاقة والأمراض المزمنة", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية قطوف الخير", "c": "🏥 صحية وأدوات طبية", "u": "https://aid.kotof.org/public/index.php/registration", "d": "تقديم خدمات صحية وانسانية وإغاثية للمجتمع الفلسطيني", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية الفجر الشبابي الفلسطيني", "c": "🍞 طرود غذائية", "u": "https://reg.fajeryouth.org/", "d": "تقديم خدمات إغاثية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "المركز السعودي للثقافة والتراث", "c": "🍞 طرود غذائية", "u": "https://portal.ksach.org/beneficial-update", "d": "مقدمة من مركز الملك سلمان للإغاثة والأعمال الإنسانية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "عملية الفارس الشهم 3", "c": "🍞 طرود غذائية", "u": "https://aid.alfaresalshahm.com/sso/login", "d": "تقديم طرود غذائية متنوعة", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية ساعد للتنمية الاجتماعية", "c": "🍞 طرود غذائية", "u": "https://forms.saiid.org/aid-form", "d": "مساعدات غذائية", "v": "2026-11-07", "e": "", "s": "منتهي"}, {"o": "جمعية معهد الأمل للأيتام", "c": "⛺ خيام وإيواء", "u": "https://docs.google.com/forms/d/e/1FAIpQLSdD6X9dZhA7uXR9vitQtDlPsWQpFas-_-Ltw-QWmUqKdC2HZQ/viewform", "d": "مستقبل واعد ليتيم ممكن", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية فلسطين الغد", "c": "🍞 طرود غذائية", "u": "https://docs.google.com/forms/d/e/1FAIpQLSdIHwhoyM3n-bYn2t-f23TedXXNASu4iyBl_7okKWzYPp88wQ/viewform", "d": "مساعدات غذائية", "v": "2026-11-07", "e": "", "s": "منتهي"}, {"o": "مؤسسة الوطن", "c": "🍞 طرود غذائية", "u": "https://ee.kobotoolbox.org/login?return_url=https%3A%2F%2Fee.kobotoolbox.org%2Fsingle%2FjAGbauPt", "d": "مساعدات غذائية", "v": "2026-11-07", "e": "", "s": "منتهي"}, {"o": "جمعية دار السبيل", "c": "🍞 طرود غذائية", "u": "https://docs.google.com/forms/d/e/1FAIpQLSex-vTGc9WEUU4gZWbSD88ZuQZKaiFJ-RMjXwt5oYLrTe7hqQ/viewform", "d": "مساعدات غذائية", "v": "2026-11-07", "e": "", "s": "منتهي"}, {"o": "مؤسسة إنقاذ الطفل", "c": "🍞 طرود غذائية", "u": "https://kobo-ee.savethechildren.net/x/dyHja8Gf", "d": "مساعدات غذائية", "v": "2026-11-07", "e": "", "s": "منتهي"}, {"o": "وزارة التنمية الاجتماعية - غزة", "c": "🍞 طرود غذائية", "u": "https://mosa.e-gaza.com/", "d": "مركز توزيع المساعدات على الأسر", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "وزارة التنمية الاجتماعية - رام الله (أمل المستقبل)", "c": "🍞 طرود غذائية", "u": "https://donate.mosd.gov.ps/war-form", "d": "استمارة الاحتياج للمتضررين من حرب 2023-2026", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "وزارة التنمية الاجتماعية - رام الله (أمل المستقبل)", "c": "💵 مساعدات نقدية", "u": "https://donate.mosd.gov.ps/war-form", "d": "استمارة الاحتياج للمتضررين من حرب 2023-2026", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "المنظومة الوطنية لتحديث بيانات المستفيدين", "c": "🍞 طرود غذائية", "u": "https://services.citizen.egaza.ps/login", "d": "المنظومة الوطنية لتحديث بيانات المستفيدين", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "المنظومة الوطنية لتحديث بيانات المستفيدين", "c": "💵 مساعدات نقدية", "u": "https://services.citizen.egaza.ps/login", "d": "المنظومة الوطنية لتحديث بيانات المستفيدين", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية المستقبل للتنمية والبيئة", "c": "📦 أخرى", "u": "https://docs.google.com/forms/d/e/1FAIpQLSdKQy727KqGe1zucPyqqeZw5VLZGU0vg69PsJP7vNAqbL7_uw/viewform", "d": "تسجيل وتحديث البامبرز لكبار السن", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "قرية السنابل لرعاية الأيتام (VESTA)", "c": "📦 أخرى", "u": "https://docs.google.com/forms/u/0/d/e/1FAIpQLSf2uY6SKtx7cLHKDcULZFugjG_JBn1hbknqPlSy4NbszQu-Hw/closedform", "d": "رعاية الأيتام", "v": "2026-11-07", "e": "", "s": "منتهي"}, {"o": "الأونروا (UNRWA)", "c": "🍞 طرود غذائية", "u": "https://gazaaid.unrwa.org/Login/Index", "d": "وكالة الغوث الأونروا", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "هيئة البترول في غزة", "c": "📦 أخرى", "u": "https://www.e-gaza.com/login", "d": "خدمة التسجيل في الغاز", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية الصداقة الفلسطينية التركية", "c": "💵 مساعدات نقدية", "u": "https://docs.google.com/forms/d/e/1FAIpQLSfDaTG5eqYxbub32xDmxSDQ8UgzkCDvNDlj27-tOwSDlIQR7w/viewform", "d": "مؤسسة خيرية عامة تركز عادةً على دعم النازحين", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية الصداقة الفلسطينية التركية", "c": "🍞 طرود غذائية", "u": "https://docs.google.com/forms/d/e/1FAIpQLSfDaTG5eqYxbub32xDmxSDQ8UgzkCDvNDlj27-tOwSDlIQR7w/viewform", "d": "مؤسسة خيرية عامة تركز عادةً على دعم النازحين", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية الصداقة الفلسطينية التركية", "c": "🏥 صحية وأدوات طبية", "u": "https://docs.google.com/forms/d/e/1FAIpQLSfDaTG5eqYxbub32xDmxSDQ8UgzkCDvNDlj27-tOwSDlIQR7w/viewform", "d": "مؤسسة خيرية عامة تركز عادةً على دعم النازحين", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية الصداقة الفلسطينية التركية", "c": "📦 أخرى", "u": "https://docs.google.com/forms/d/e/1FAIpQLSfDaTG5eqYxbub32xDmxSDQ8UgzkCDvNDlj27-tOwSDlIQR7w/viewform", "d": "مؤسسة خيرية عامة تركز عادةً على دعم النازحين", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية رؤية شبابية", "c": "🍞 طرود غذائية", "u": "https://new.yvs.ps/public/index.php/registration", "d": "تسجيل المواطنين للاستفادة من خدمات الجمعية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية ساعد (إدارة مخيمات النزوح)", "c": "⛺ خيام وإيواء", "u": "https://a.saiid.org/shelter-form", "d": "تسجيل إدارة مخيمات النزوح للإستفادة من الخدمات الاغاثية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية ساعد (مرضى وكبار السن)", "c": "📦 أخرى", "u": "https://a.saiid.org/patient-form", "d": "تسجيل المرضى وكبار السن للإستفادة من الخدمات الاغاثية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية ساعد (للمواطنين)", "c": "🍞 طرود غذائية", "u": "https://a.saiid.org/aid-form", "d": "تسجيل المواطنين للإستفادة من الخدمات الاغاثية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية الجليل للتنمية والتطوير", "c": "🍞 طرود غذائية", "u": "https://docs.google.com/forms/d/e/1FAIpQLSfqVQbv2bsHgLY0vagBAZ-ptNQpWYPe20NInyLH5C6wUJ5ViQ/viewform", "d": "التسجيل للمساعدات", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "ميدجلوبال - (مكملات غذائية)", "c": "📦 أخرى", "u": "https://forms.cloud.microsoft/pages/responsepage.aspx?id=BhhPFTa8SEO9Niu7RRwVrPdwsUVMZK5Ko9LPCIIn9TZUN0hDTTJOSDBWSTNYMFRFU0JESDc4VVZITS4u&route=shorturl", "d": "طلب التسجيل للاستفادة من المكملات الغذائية", "v": "2026-11-07", "e": "", "s": "شغال"}, {"o": "جمعية التغربد للثقافة والتنمية", "c": "🍞 طرود غذائية", "u": "https://aid.altagreedpal.com/public/index.php/registration", "d": "مساعدات غذائية", "v": "2026-11-07", "e": "", "s": "شغال"}];
+var AID_EN = { '🍞': 'Food parcels', '💵': 'Cash aid', '🏥': 'Health & medical', '⛺': 'Shelter & tents', '🎓': 'Education & grants', '📦': 'Other' };
+var AID_HEAD = ['اسم المؤسسة', 'التصنيف', 'الرابط', 'وصف قصير', 'تاريخ التحقق', 'آخر موعد', 'الحالة'];
+var AID_SHARED = ['docs.google.com', 'forms.gle', 'forms.cloud.microsoft', 'forms.office.com', 'ee.kobotoolbox.org', 'kobo-ee.savethechildren.net'];
+var aidRows = AID_SNAP, aidCat = '', aidLast = 0;
+function csvParse(t) {
+  var rows = [], row = [], f = '', q = false, i = 0, c;
+  t = String(t).replace(/^﻿/, '');
+  for (; i < t.length; i++) {
+    c = t[i];
+    if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); f = ''; rows.push(row); row = []; }
+    else f += c;
+  }
+  if (f !== '' || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+function aidFromCsv(text) {
+  var R = csvParse(text); if (!R.length) return null;
+  var H = R[0].map(function (x) { return String(x).trim(); }), ix = AID_HEAD.map(function (h) { return H.indexOf(h); });
+  if (ix.some(function (n) { return n < 0; })) return null;
+  var out = [];
+  R.slice(1).forEach(function (r) {
+    var g = function (k) { return String(r[ix[k]] || '').trim(); };
+    if (g(0) && g(2)) out.push({ o: g(0), c: g(1), u: g(2), d: g(3), v: g(4), e: g(5), s: g(6) });
+  });
+  return out;
+}
+function aidDate(s) {
+  s = String(s || '').trim(); if (!s) return null;
+  var m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+  m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/); if (m) return new Date(+m[3], +m[1] - 1, +m[2]);
+  return null;
+}
+function aidFmt(s) { var d = aidDate(s); if (!d) return ''; try { return d.toLocaleDateString(lang === 'ar' ? 'ar-u-nu-latn' : 'en', { day: 'numeric', month: 'long' }); } catch (e) { return s; } }
+function aidLoad() {
+  try { var c = load('aidcsv'); if (c) { var a = aidFromCsv(c); if (a && a.length) aidRows = a; } } catch (e) {}
+}
+function aidFetch() {
+  if (!AID_URL || !navigator.onLine || Date.now() - aidLast < 600000) return;
+  aidLast = Date.now();
+  fetch(AID_URL, { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : Promise.reject(); }).then(function (t) {
+    var a = aidFromCsv(t); if (!a || !a.length) return;
+    aidRows = a; store('aidcsv', t); renderAid();
+  }).catch(function () {});
+}
+function aidCatLbl(c) { if (lang !== 'en') return c; var e = AID_EN[Array.from(c)[0]]; return e ? Array.from(c)[0] + ' ' + e : c; }
+function aidVisible() {
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var map = {}, order = [];
+  aidRows.forEach(function (r) {
+    if (r.s !== 'شغال' || !/^https?:\/\//i.test(r.u)) return;
+    var e = aidDate(r.e); if (e && today > e) return;
+    var k = r.o + '|' + r.u;
+    if (!map[k]) { map[k] = { o: r.o, u: r.u, d: r.d, cats: [], v: '', e: r.e }; order.push(k); }
+    if (r.c && map[k].cats.indexOf(r.c) < 0) map[k].cats.push(r.c);
+    var vd = aidDate(r.v), cur = aidDate(map[k].v); if (vd && (!cur || vd > cur)) map[k].v = r.v;
+  });
+  return order.map(function (k) { return map[k]; });
+}
+function renderAid() {
+  if (!$('aidList')) return;
+  var all = aidVisible(), cats = [];
+  all.forEach(function (x) { x.cats.forEach(function (c) { if (cats.indexOf(c) < 0) cats.push(c); }); });
+  var ORD = ['🍞', '💵', '🏥', '⛺', '🎓', '📦']; cats.sort(function (a, b) { var i = ORD.indexOf(Array.from(a)[0]), j = ORD.indexOf(Array.from(b)[0]); return (i < 0 ? 99 : i) - (j < 0 ? 99 : j); });
+  if (aidCat && cats.indexOf(aidCat) < 0) aidCat = '';
+  var chips = $('aidChips'); chips.textContent = '';
+  [''].concat(cats).forEach(function (c) {
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', c === aidCat ? 'true' : 'false');
+    b.textContent = c ? aidCatLbl(c) : tr('aidAll');
+    b.addEventListener('click', function () { aidCat = c; renderAid(); });
+    chips.appendChild(b);
+  });
+  var latest = '', ld = null;
+  all.forEach(function (x) { var d = aidDate(x.v); if (d && (!ld || d > ld)) { ld = d; latest = x.v; } });
+  $('aidUpd').textContent = latest ? tr('aidUpd') + ': ' + aidFmt(latest) : '';
+  var list = $('aidList'); list.textContent = '';
+  var show = all.filter(function (x) { return !aidCat || x.cats.indexOf(aidCat) > -1; });
+  if (!show.length) { var em = document.createElement('div'); em.className = 'aidempty'; em.textContent = tr('aidEmpty'); list.appendChild(em); return; }
+  show.forEach(function (x) {
+    var c = document.createElement('div'); c.className = 'aidc';
+    var n = document.createElement('b'); n.textContent = x.o; c.appendChild(n);
+    if (x.d) { var p = document.createElement('p'); p.className = 'adesc'; p.textContent = x.d; c.appendChild(p); }
+    var bd = document.createElement('div'); bd.className = 'abadges';
+    x.cats.forEach(function (k) { var s = document.createElement('span'); s.textContent = aidCatLbl(k); bd.appendChild(s); });
+    c.appendChild(bd);
+    var mt = document.createElement('div'); mt.className = 'ameta';
+    if (x.v) { var v = document.createElement('span'); v.className = 'avr'; v.textContent = '✓ ' + tr('aidVer') + ': ' + aidFmt(x.v); mt.appendChild(v); }
+    if (x.e && aidDate(x.e)) { var du = document.createElement('span'); du.className = 'due'; du.textContent = tr('aidDue') + ': ' + aidFmt(x.e); mt.appendChild(du); }
+    if (mt.childNodes.length) c.appendChild(mt);
+    var a = document.createElement('a'); a.className = 'aopen'; a.href = x.u; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = tr('aidOpen'); c.appendChild(a);
+    list.appendChild(c);
+  });
+}
+function aidNorm(u) {
+  u = String(u || '').trim(); if (!u) return null;
+  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(u)) u = 'https://' + u;
+  try {
+    var x = new URL(u), host = x.hostname.toLowerCase().replace(/^www\./, ''), path = x.pathname.replace(/\/+$/, '').toLowerCase();
+    return { host: host, base: host + path, full: host + path + x.search.toLowerCase() };
+  } catch (e) { return null; }
+}
+function aidCheck() {
+  var box = $('aidRes'), n = aidNorm($('aidChk').value), cls = 'info', msg;
+  if (!n) { msg = tr('aidR_empty'); }
+  else {
+    var exact = null, same = null;
+    aidRows.forEach(function (r) {
+      var m = aidNorm(r.u); if (!m) return;
+      var hit = r.u.indexOf('?') > -1 ? m.full === n.full : m.base === n.base;
+      if (hit) { if (!exact || r.s === 'نصب' || (exact.s !== 'نصب' && r.s === 'شغال')) exact = r; }
+      else if (m.host === n.host && AID_SHARED.indexOf(n.host) < 0) { if (!same || r.s === 'نصب') same = r; }
+    });
+    if (exact && exact.s === 'نصب') { cls = 'bad'; msg = tr('aidR_bad'); }
+    else if (exact && exact.s === 'شغال') { cls = 'ok'; msg = tr('aidR_ok') + exact.o; }
+    else if (exact) { cls = 'warn'; msg = tr('aidR_end') + exact.o; }
+    else if (same && same.s === 'نصب') { cls = 'bad'; msg = tr('aidR_bad'); }
+    else if (same) { cls = 'warn'; msg = tr('aidR_host') + same.o; }
+    else { msg = tr('aidR_unk'); }
+  }
+  box.className = 'aidres ' + cls; box.textContent = msg; box.hidden = false;
+}
+$('aidChkBtn').addEventListener('click', aidCheck);
+$('aidChk').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); aidCheck(); } });
+aidLoad();
 
 // ----- مطاعم -----
 var RESTS = [
@@ -3008,7 +3175,7 @@ function qrCard(link, title, sub, foot, phone) {
   c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + 700, y, x + 700, y + 700, r); c.arcTo(x + 700, y + 700, x, y + 700, r); c.arcTo(x, y + 700, x, y, r); c.arcTo(x, y, x + 700, y, r); c.fill();
   c.drawImage(qc, (W - 660) / 2, y + 20, 660, 660);
   if (phone) { c.direction = 'ltr'; c.fillStyle = '#fff'; c.font = '800 58px ' + F; c.fillText(phone, W / 2, 1160); c.direction = 'rtl'; }
-  c.fillStyle = '#ffc20e'; c.font = '800 56px ' + F; c.fillText('امسح الرمز بكاميرا جوالك', W / 2, 1230);
+  c.fillStyle = '#ffc20e'; c.font = '800 56px ' + F; c.fillText((lang === 'en' ? 'Scan the code with your phone camera' : 'امسح الرمز بكاميرا جوالك'), W / 2, 1230);
   c.fillStyle = '#9fb2cb'; c.font = '600 38px ' + F; c.fillText(foot, W / 2, 1300, 940);
   return cv;
 }
@@ -3221,18 +3388,18 @@ $('qrBtn').addEventListener('click', function () { show('qr'); });
 $('qrBack').addEventListener('click', function () { show('help'); });
 document.querySelectorAll('#qrW button').forEach(function (b) { b.addEventListener('click', function () { qrW = b.dataset.w; qrPaint(); $('qrOut').hidden = true; }); });
 document.querySelectorAll('#qrT button').forEach(function (b) { b.addEventListener('click', function () { qrT = b.dataset.t; qrPaint(); $('qrOut').hidden = true; }); });
-$('qrAppSave').addEventListener('click', function () { qrShare(qrCard(qrBase(), 'ثبّت حوّل', 'مساعد تحويل أموال · ببلاش', qrBase().replace(/^https?:\/\//, '')), 'hawwil-app-qr.png'); });
+$('qrAppSave').addEventListener('click', function () { qrShare(qrCard(qrBase(), (lang === 'en' ? 'Install Hawwil' : 'ثبّت حوّل'), (lang === 'en' ? 'Money transfer helper · Free' : 'مساعد تحويل أموال · ببلاش'), qrBase().replace(/^https?:\/\//, '')), 'hawwil-app-qr.png'); });
 $('qrMake').addEventListener('click', function () {
   var p = cleanPhone($('qrPhone').value), nm = $('qrName').value.trim().slice(0, 24);
-  if (!/^(059|056)\d{7}$/.test(p)) { $('qrErr').textContent = 'اكتب رقم جوال صحيح (059 أو 056).'; $('qrOut').hidden = true; return; }
+  if (!/^(059|056)\d{7}$/.test(p)) { $('qrErr').textContent = (lang === 'en' ? 'Enter a valid mobile number (059 or 056).' : 'اكتب رقم جوال صحيح (059 أو 056).'); $('qrOut').hidden = true; return; }
   $('qrErr').textContent = '';
   var link = qrPayLink(qrW, p, nm, qrT); qrCur = { link: link, p: p, nm: nm, w: qrW };
-  try { qrDraw($('qrPay'), link); } catch (e) { $('qrErr').textContent = 'ما قدرنا نعمل الرمز.'; return; }
+  try { qrDraw($('qrPay'), link); } catch (e) { $('qrErr').textContent = (lang === 'en' ? 'Could not create the code.' : 'ما قدرنا نعمل الرمز.'); return; }
   store('myqr', JSON.stringify({ w: qrW, t: qrT, n: nm, p: p })); $('qrOut').hidden = false;
 });
 $('qrPaySave').addEventListener('click', function () {
   if (!qrCur) return;
-  qrShare(qrCard(qrCur.link, qrCur.nm || 'ادفع لي بحوّل', METHODS[qrCur.w].name, qrBase().replace(/^https?:\/\//, ''), fmt(qrCur.p)), 'hawwil-pay-qr.png');
+  qrShare(qrCard(qrCur.link, qrCur.nm || (lang === 'en' ? 'Pay me with Hawwil' : 'ادفع لي بحوّل'), METHODS[qrCur.w].name, qrBase().replace(/^https?:\/\//, ''), fmt(qrCur.p)), 'hawwil-pay-qr.png');
 });
 // فتح رابط دفع جاي من QR
 var lnkData = null;
@@ -3240,10 +3407,10 @@ function lnkOpen() {
   var q = new URLSearchParams(location.search), m = q.get('m'), p = cleanPhone(q.get('p') || '');
   if (!q.has('m') && !q.has('p')) return;
   try { history.replaceState(null, '', location.pathname); } catch (e) {}
-  if (!(m === 'palpay' || m === 'jawwal') || !/^(059|056)\d{7}$/.test(p)) { toast('رابط الدفع مش صحيح.'); return; }
+  if (!(m === 'palpay' || m === 'jawwal') || !/^(059|056)\d{7}$/.test(p)) { toast(lang === 'en' ? 'Invalid payment link.' : 'رابط الدفع مش صحيح.'); return; }
   var nm = (q.get('n') || '').replace(/[<>]/g, '').trim().slice(0, 24), t = q.get('t') === 'f' ? 'friend' : 'driver';
   lnkData = { m: m, p: p, nm: nameOf(p) || nm, to: t };
-  $('lnkWho').textContent = lnkData.nm || 'مستلم بدون اسم'; $('lnkNum').textContent = fmt(p); $('lnkVia').textContent = METHODS[m].name;
+  $('lnkWho').textContent = lnkData.nm || (lang === 'en' ? 'Recipient (no name)' : 'مستلم بدون اسم'); $('lnkNum').textContent = fmt(p); $('lnkVia').textContent = METHODS[m].name;
   $('lnk').hidden = false;
 }
 $('lnkNo').addEventListener('click', function () { $('lnk').hidden = true; lnkData = null; });
