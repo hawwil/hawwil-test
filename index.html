@@ -2362,7 +2362,7 @@ function show(name) {
   Object.keys(map).forEach(function (k) { $(map[k]).classList.toggle('on', k === name); });
   $('ctaForm').style.display = name === 'form' ? 'block' : 'none';
   $('tabs').hidden = !(name === 'form' || name === 'hist' || name === 'rest' || name === 'aid');
-  $('tabAid').hidden = $('tabs').hidden;
+  $('tabAid').hidden = !(name === 'form' || name === 'aid');
   $('tabAid').setAttribute('aria-pressed', name === 'aid' ? 'true' : 'false');
   if (name === 'aid') { renderAid(); aidFetch(); }
   $('tabRest').setAttribute('aria-pressed', name === 'rest' ? 'true' : 'false');
