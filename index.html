@@ -2184,6 +2184,9 @@ function normFav(o) { favList(o).forEach(function (k, i) { o[k].o = i; }); }
 var favEditing = false, favOpen = false;
 function rhide() { try { var a = JSON.parse(load('rhide') || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
 function favCount(o) { var c = 0; for (var k in o) if (o[k] && o[k].f) c++; return c; }
+var OWNERS = ['abdelrahman'];
+function isOwner() { return !!(acS && acS.u && OWNERS.indexOf(String(acS.u).toLowerCase()) >= 0); }
+function favLimit() { return isOwner() ? 9999 : 5; }
 function toast(msg, ms) { $('toast').textContent = msg; $('toast').hidden = false; setTimeout(function () { $('toast').hidden = true; }, ms || 3000); }
 function syncName() {
   var d = cleanPhone($('phone').value), ok = /^(059|056)\d{7}$/.test(d), b = ok ? getBook()[d] : null;
@@ -2217,7 +2220,7 @@ $('fav').addEventListener('click', function () {
   var d = cleanPhone($('phone').value);
   if (!/^(059|056)\d{7}$/.test(d)) { toast(tr('favNeed')); return; }
   var o = getBook(), cur = o[d] || { n: '', f: 0 };
-  if (!cur.f && favCount(o) >= 5) { toast(tr('favMax'), 3500); return; }
+  if (!cur.f && favCount(o) >= favLimit()) { toast(tr('favMax'), 3500); return; }
   cur.f = cur.f ? 0 : 1; cur.n = $('pname').value.trim() || cur.n || ''; if ($('prel').value) cur.r = $('prel').value; else delete cur.r;
   if (cur.f) cur.o = 999;
   o[d] = cur; normFav(o); saveBook(o);
