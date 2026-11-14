@@ -360,6 +360,8 @@ input:focus,input:focus-visible{outline:none}
 @media (prefers-reduced-motion: reduce){.panel.on,#confirm.on .receipt,.toast.upd{animation:none!important}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 
+.aseg{display:flex;gap:6px;background:var(--track);border-radius:14px;padding:5px;margin:0 0 14px}.aseg button{flex:1;border:0;background:transparent;color:var(--muted);font:inherit;font-weight:800;font-size:14.5px;border-radius:10px;padding:10px 4px;min-height:42px;cursor:pointer}.aseg button.on{background:var(--yellow);color:var(--on-yellow)}
+.anum{direction:ltr;text-align:right;font-size:22px;font-weight:800;letter-spacing:.5px;margin:8px 0 0}html[dir="ltr"] .anum{text-align:left}.afree{display:inline-block;background:var(--track);border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:700;margin-top:8px}.aidc .aen{color:var(--muted);font-weight:700;font-size:14px}.acall{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:var(--yellow);color:var(--on-yellow);border-radius:12px;padding:11px;font-weight:800;font-size:15px;margin-top:12px;min-height:46px}
 .aidchips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
 .aidchips button{background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;font-size:13.5px;cursor:pointer;min-height:38px}
 .aidchips button[aria-pressed="true"]{background:var(--yellow);color:var(--on-yellow);border-color:var(--yellow)}
@@ -547,6 +549,9 @@ input:focus,input:focus-visible{outline:none}
     </section>
 
     <section id="aidPanel" class="panel">
+      <div class="aseg" role="tablist"><button type="button" id="asegL" class="on" data-i18n="asegL">روابط التسجيل</button><button type="button" id="asegN" data-i18n="asegN">أرقام المؤسسات</button></div>
+      <div id="aidNums" hidden></div>
+      <div id="aidLinks">
       <span class="lbl stp" data-i18n="aidPick">اختار نوع المساعدة</span>
       <div class="aidchips" id="aidChips"></div>
       <p class="aidupd" id="aidUpd"></p>
@@ -556,7 +561,8 @@ input:focus,input:focus-visible{outline:none}
         <div class="row"><input id="aidChk" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-ph="aidChkPh" placeholder="https://"><button id="aidChkBtn" type="button" data-i18n="aidChkBtn">افحص</button></div>
         <div class="aidres" id="aidRes" hidden></div>
       </div>
-      <p class="rdisc" data-i18n="aidNote">حوّل بيعرض روابط تسجيل راجعناها يدوياً، وما بيطلب منك أي بيانات. لا تعطي هويتك أو بياناتك إلا لجهة رسمية بتعرفها، وحوّل مش جهة مساعدات.</p>
+      </div>
+      <p class="rdisc" id="aidNoteP" data-i18n="aidNote">حوّل بيعرض روابط تسجيل راجعناها يدوياً، وما بيطلب منك أي بيانات. لا تعطي هويتك أو بياناتك إلا لجهة رسمية بتعرفها، وحوّل مش جهة مساعدات.</p>
     </section>
 
     <section id="confirm" class="panel">
@@ -2478,7 +2484,7 @@ var I18N = {
     restPayBtn: 'ادفع',     restMerchNo: 'رقم التاجر:',     relNone: 'العلاقة (اختياري)', relAria: 'العلاقة', rel_friend: 'صديق', rel_wife: 'زوجة', rel_husband: 'زوج', rel_mother: 'أم', rel_father: 'أب', rel_brother: 'أخ', rel_sister: 'أخت', rel_son: 'ابن', rel_daughter: 'بنت', rel_relative: 'قريب', rel_seller: 'بائع',
     hardRef: 'تحديث التطبيق (مسح الكاش)', hardRefS: 'تحديث التطبيق', moreT: 'المزيد', hardRefDone: 'تم. بيعيد التحميل...',
     rpinOn: 'تثبيت', rpinOff: 'إلغاء التثبيت',
-    tabAid: 'روابط المساعدات', aidPick: 'اختار نوع المساعدة', aidAll: 'الكل', aidOpen: 'افتح رابط التسجيل', aidVer: 'تم التحقق', aidDue: 'آخر موعد', aidUpd: 'آخر مراجعة للروابط', aidEmpty: 'ما في روابط شغالة بهالنوع هلأ.', aidChkT: 'افحص رابط قبل ما تفتحه', aidChkPh: 'الصق الرابط هنا', aidChkBtn: 'افحص', aidNote: 'حوّل بيعرض روابط تسجيل راجعناها يدوياً، وما بيطلب منك أي بيانات. لا تعطي هويتك أو بياناتك إلا لجهة رسمية بتعرفها، وحوّل مش جهة مساعدات.', aidR_empty: 'الصق الرابط أول.', aidR_ok: '✅ رابط موثق: ', aidR_end: '⚠️ رابط معروف، بس التسجيل منتهي: ', aidR_bad: '❌ رابط نصب معروف. لا تفتحه ولا تكتب أي بيانات.', aidR_host: '⚠️ نفس موقع الجهة اللي بقائمتنا، بس هاد الرابط بالذات مش عندنا. تأكد منه قبل ما تكتب بياناتك: ', aidR_unk: 'ℹ️ الرابط مش موجود بقائمتنا. هاد ما يعني إنه نصب، بس لا تعطي بياناتك إلا لجهة بتعرفها.', tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', restWa: 'واتساب', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_cafes: 'كافيهات', cat_sweets: 'حلويات', cat_pharmacies: 'صيدليات', cat_library: 'مكتبات وقرطاسية', cat_meats: 'لحوم ومجمدات', cat_clothes: 'ملابس وأحذية', cat_packaging: 'مستلزمات التغليف', cat_gateaux: 'جاتوهات', cat_supermarkets: 'سوبرماركت', cat_offices: 'مكاتب', cat_taxis: 'مكاتب تاكسيات', cat_malls: 'مولات تجارية', cat_delivery: 'شركات التوصيل', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
+    tabAid: 'المساعدات', asegL: 'روابط التسجيل', asegN: 'أرقام المؤسسات', numFree: 'اتصال مجاني', numVer: 'تم التحقق بالاتصال', numCall: 'اتصل', numNote: 'أرقام جرّبناها بالاتصال وتأكدنا منها. حوّل مش جهة مساعدات، وما بيطلب منك أي بيانات.', aidPick: 'اختار نوع المساعدة', aidAll: 'الكل', aidOpen: 'افتح رابط التسجيل', aidVer: 'تم التحقق', aidDue: 'آخر موعد', aidUpd: 'آخر مراجعة للروابط', aidEmpty: 'ما في روابط شغالة بهالنوع هلأ.', aidChkT: 'افحص رابط قبل ما تفتحه', aidChkPh: 'الصق الرابط هنا', aidChkBtn: 'افحص', aidNote: 'حوّل بيعرض روابط تسجيل راجعناها يدوياً، وما بيطلب منك أي بيانات. لا تعطي هويتك أو بياناتك إلا لجهة رسمية بتعرفها، وحوّل مش جهة مساعدات.', aidR_empty: 'الصق الرابط أول.', aidR_ok: '✅ رابط موثق: ', aidR_end: '⚠️ رابط معروف، بس التسجيل منتهي: ', aidR_bad: '❌ رابط نصب معروف. لا تفتحه ولا تكتب أي بيانات.', aidR_host: '⚠️ نفس موقع الجهة اللي بقائمتنا، بس هاد الرابط بالذات مش عندنا. تأكد منه قبل ما تكتب بياناتك: ', aidR_unk: 'ℹ️ الرابط مش موجود بقائمتنا. هاد ما يعني إنه نصب، بس لا تعطي بياناتك إلا لجهة بتعرفها.', tabRest: 'الدليل', restPickCat: 'اختار التصنيف', restTitle: 'الدليل', restSearch: 'ابحث عن محل', restDisc: 'حوّل بيجهّز كود الدفع بس، وما بتضمن الخدمة. التعامل مع المحل مسؤولية الطرفين.', restIg: 'انستغرام', restFb: 'فيسبوك', restCall: 'اتصال', restWa: 'واتساب', cat_all: 'الكل', cat_restaurants: 'مطاعم', cat_cafes: 'كافيهات', cat_sweets: 'حلويات', cat_pharmacies: 'صيدليات', cat_library: 'مكتبات وقرطاسية', cat_meats: 'لحوم ومجمدات', cat_clothes: 'ملابس وأحذية', cat_packaging: 'مستلزمات التغليف', cat_gateaux: 'جاتوهات', cat_supermarkets: 'سوبرماركت', cat_offices: 'مكاتب', cat_taxis: 'مكاتب تاكسيات', cat_malls: 'مولات تجارية', cat_delivery: 'شركات التوصيل', cat_stands: 'بسطات', restNA: 'غير متاح', restEmpty: 'ما في مطاعم لسا.', restMerchant: 'دفع لتاجر',
     brand: 'حوّل', themeAria: 'تبديل العرض نهاري أو ليلي', offline: 'بدون إنترنت',
     payTo: 'بدك تدفع إلى', driver: 'سائق', merchant: 'تاجر', friend: 'صديق',
     payMethod: 'اختار وسيلة الدفع', m_jawwal: 'جوال باي', m_palpay: 'بال باي', m_bop: 'بنك فلسطين', soon: 'قريباً',
@@ -2521,7 +2527,7 @@ var I18N = {
     restPayBtn: 'Pay',     restMerchNo: 'Merchant number:',     relNone: 'Relationship (optional)', relAria: 'Relationship', rel_friend: 'Friend', rel_wife: 'Wife', rel_husband: 'Husband', rel_mother: 'Mother', rel_father: 'Father', rel_brother: 'Brother', rel_sister: 'Sister', rel_son: 'Son', rel_daughter: 'Daughter', rel_relative: 'Relative', rel_seller: 'Seller',
     hardRef: 'Refresh app (clear cache)', hardRefS: 'Refresh app', moreT: 'More', hardRefDone: 'Done. Reloading...',
     rpinOn: 'Pin', rpinOff: 'Unpin',
-    tabAid: 'Aid links', aidPick: 'Choose the type of aid', aidAll: 'All', aidOpen: 'Open registration link', aidVer: 'Verified', aidDue: 'Deadline', aidUpd: 'Links last reviewed', aidEmpty: 'No open links for this type right now.', aidChkT: 'Check a link before opening it', aidChkPh: 'Paste the link here', aidChkBtn: 'Check', aidNote: 'Hawwil lists registration links we reviewed by hand and never asks you for any data. Only give your ID or personal details to an official body you know. Hawwil is not an aid organization.', aidR_empty: 'Paste the link first.', aidR_ok: '✅ Verified link: ', aidR_end: '⚠️ Known link, but registration has ended: ', aidR_bad: '❌ Known scam link. Do not open it or enter any data.', aidR_host: '⚠️ Same site as an organization on our list, but this exact link is not on it. Double-check before entering your data: ', aidR_unk: 'ℹ️ This link is not on our list. That does not mean it is a scam, but only give your data to a body you know.', tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', restWa: 'WhatsApp', cat_all: 'All', cat_restaurants: 'Restaurants', cat_cafes: 'Cafes', cat_sweets: 'Sweets', cat_pharmacies: 'Pharmacies', cat_library: 'Books & stationery', cat_meats: 'Meat & frozen', cat_clothes: 'Clothing & shoes', cat_packaging: 'Packaging supplies', cat_gateaux: 'Cakes', cat_supermarkets: 'Supermarkets', cat_offices: 'Offices', cat_taxis: 'Taxi offices', cat_malls: 'Shopping malls', cat_delivery: 'Delivery companies', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
+    tabAid: 'Aid', asegL: 'Registration links', asegN: 'Organization numbers', numFree: 'Toll-free', numVer: 'Verified by calling', numCall: 'Call', numNote: 'Numbers we called and confirmed ourselves. Hawwil is not an aid organization and never asks you for any data.', aidPick: 'Choose the type of aid', aidAll: 'All', aidOpen: 'Open registration link', aidVer: 'Verified', aidDue: 'Deadline', aidUpd: 'Links last reviewed', aidEmpty: 'No open links for this type right now.', aidChkT: 'Check a link before opening it', aidChkPh: 'Paste the link here', aidChkBtn: 'Check', aidNote: 'Hawwil lists registration links we reviewed by hand and never asks you for any data. Only give your ID or personal details to an official body you know. Hawwil is not an aid organization.', aidR_empty: 'Paste the link first.', aidR_ok: '✅ Verified link: ', aidR_end: '⚠️ Known link, but registration has ended: ', aidR_bad: '❌ Known scam link. Do not open it or enter any data.', aidR_host: '⚠️ Same site as an organization on our list, but this exact link is not on it. Double-check before entering your data: ', aidR_unk: 'ℹ️ This link is not on our list. That does not mean it is a scam, but only give your data to a body you know.', tabRest: 'Directory', restPickCat: 'Choose a category', restTitle: 'Directory', restSearch: 'Search shops', restDisc: 'Hawwil only prepares the payment code and does not guarantee the service. Dealing with the shop is between you and them.', restIg: 'Instagram', restFb: 'Facebook', restCall: 'Call', restWa: 'WhatsApp', cat_all: 'All', cat_restaurants: 'Restaurants', cat_cafes: 'Cafes', cat_sweets: 'Sweets', cat_pharmacies: 'Pharmacies', cat_library: 'Books & stationery', cat_meats: 'Meat & frozen', cat_clothes: 'Clothing & shoes', cat_packaging: 'Packaging supplies', cat_gateaux: 'Cakes', cat_supermarkets: 'Supermarkets', cat_offices: 'Offices', cat_taxis: 'Taxi offices', cat_malls: 'Shopping malls', cat_delivery: 'Delivery companies', cat_stands: 'Stands', restNA: 'Not available', restEmpty: 'No restaurants yet.', restMerchant: 'Merchant payment',
     brand: 'Hawwil', themeAria: 'Switch day or night mode', offline: 'Works offline',
     payTo: 'Pay to', driver: 'Driver', merchant: 'Merchant', friend: 'Friend',
     payMethod: 'Choose payment method', m_jawwal: 'Jawwal Pay', m_palpay: 'PalPay', m_bop: 'Bank of Palestine', soon: 'Soon',
@@ -2812,6 +2818,8 @@ document.querySelectorAll('#tabs button').forEach(function (b) {
   b.addEventListener('click', function () { if (b.id === 'tabRest') { restShowList(); show('rest'); } else show(b.id === 'tabHist' ? 'hist' : 'form'); });
 });
 $('tabAid').addEventListener('click', function () { show('aid'); });
+$('asegL').addEventListener('click', function () { aidTab = 'links'; renderNums(); });
+$('asegN').addEventListener('click', function () { aidTab = 'nums'; renderNums(); });
 
 // ----- شاشة التعريف + المساعدة -----
 var ICO = [
@@ -3019,8 +3027,35 @@ function aidVisible() {
   });
   return order.map(function (k) { return map[k]; });
 }
+var AID_NUMS = [
+  { ar: 'اليونيسف', en: 'UNICEF', n: '1800500800', v: '2026-11-14' },
+  { ar: 'برنامج الأغذية العالمي', en: 'WFP', n: '1800124126', v: '2026-11-14' },
+  { ar: 'الإغاثة الكاثوليكية', en: 'CRS', n: '1800277277', v: '2026-11-14' }
+];
+var aidTab = 'links';
+function renderNums() {
+  var box = $('aidNums'); if (!box) return;
+  var nums = aidTab === 'nums';
+  box.hidden = !nums; $('aidLinks').hidden = nums;
+  $('asegL').classList.toggle('on', !nums); $('asegN').classList.toggle('on', nums);
+  $('aidNoteP').textContent = tr(nums ? 'numNote' : 'aidNote');
+  box.textContent = '';
+  AID_NUMS.forEach(function (x) {
+    var c = document.createElement('div'); c.className = 'aidc';
+    var b = document.createElement('b'); b.textContent = (lang === 'en' ? x.en : x.ar) + ' ';
+    if (lang !== 'en') { var e = document.createElement('span'); e.className = 'aen'; e.textContent = '(' + x.en + ')'; b.appendChild(e); }
+    var n = document.createElement('div'); n.className = 'anum'; n.textContent = x.n.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+    var f = document.createElement('span'); f.className = 'afree'; f.textContent = tr('numFree');
+    var m = document.createElement('div'); m.className = 'ameta'; var v = document.createElement('span'); v.className = 'avr'; v.textContent = '✓ ' + tr('numVer') + ': ' + aidFmt(x.v); m.appendChild(v);
+    var a = document.createElement('a'); a.className = 'acall'; a.href = 'tel:' + x.n; a.target = '_top'; a.rel = 'noopener';
+    a.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>';
+    a.appendChild(document.createTextNode(tr('numCall')));
+    c.appendChild(b); c.appendChild(n); c.appendChild(f); c.appendChild(m); c.appendChild(a); box.appendChild(c);
+  });
+}
 function renderAid() {
   if (!$('aidList')) return;
+  renderNums();
   var all = aidVisible(), cats = [];
   all.forEach(function (x) { x.cats.forEach(function (c) { if (cats.indexOf(c) < 0) cats.push(c); }); });
   var ORD = ['🍞', '💵', '🏥', '⛺', '🎓', '📦']; cats.sort(function (a, b) { var i = ORD.indexOf(Array.from(a)[0]), j = ORD.indexOf(Array.from(b)[0]); return (i < 0 ? 99 : i) - (j < 0 ? 99 : j); });
